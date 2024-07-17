@@ -9,14 +9,3 @@
     font-family: "Poppins", sans-serif;
   }
 }
-
-@layer utilities {
-  .no-scroll {
-    height: 100%;
-    overflow: hidden;
-  }
-
-  .line {
-    border: 30px solid black;
-  }
-}
