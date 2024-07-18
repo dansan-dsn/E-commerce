@@ -1,33 +1,25 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import { MdOutlineEmail } from "react-icons/md";
-import Password from "../components/Password";
-import backgroundImg from "../assets/images/shop.jpg";
+import backgroundImg from "../assets/images/pexels-karolina-grabowska-5632382.jpg";
 import useImage from "../assets/images/shopping cart.jpeg";
 import { validateEmail } from "../utils/validator";
+import { IoIosArrowBack } from "react-icons/io";
 
-const Login = () => {
+const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handlePasswordReset = (e) => {
     e.preventDefault();
     if (!validateEmail(email)) {
       setError("Please enter a valid email address");
       return;
     }
-    if (!password) {
-      setError("Please enter password");
-      return;
-    }
-
     setEmail("");
-    setPassword("");
     setError("");
-    navigate("/");
+    navigate("/forgot_password/verify");
   };
   return (
     <div
@@ -44,30 +36,20 @@ const Login = () => {
       >
         <div className=" leading-10 m-2">
           <h2 className="font-bold text-2xl text-center mb-5  mt-14">
-            Login Account
+            Forgot Password
           </h2>
-          <div className="flex ">
-            <Link
-              to="/login"
-              className="w-full border border-slate-500 hover:bg-blue-600 relative rounded text-center bg-slate-500"
-            >
-              <FcGoogle className="size-6 absolute bottom-2 left-6" />
-              Google
-            </Link>
-          </div>
-          <div className="flex justify-center mt-10">
-            <span className="hidden md:block border-t-2 border-neutral-300 w-16 mr-4"></span>
-            <span className="-mt-5 text-center  md:ml-0 ">
-              or continue with email
-            </span>
-            <span className="hidden md:block border-t-2 border-neutral-300 w-16 ml-4"></span>
-          </div>
           {error && (
             <p className="text-amber-300 w-full -mb-3 drop-shadow-2xl">
               {error}
             </p>
           )}
-          <form className="flex flex-col items-center" onSubmit={handleLogin}>
+          <p className="flex-none justify-start text-slate-300">
+            Enter email to send password reset OTP*
+          </p>
+          <form
+            className="flex flex-col items-center"
+            onSubmit={handlePasswordReset}
+          >
             <label htmlFor="email" className="mb-5 relative flex text-gray-400">
               <MdOutlineEmail className="absolute left-1 top-4 size-6" />
               <input
@@ -80,37 +62,20 @@ const Login = () => {
                 className="py-2 rounded px-8 w-full bg-slate-300 text-neutral-700"
               />
             </label>
-            <Password
-              placeholder={"Password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <div className="flex justify-between w-full -mt-7">
-              <label htmlFor="check" className="">
-                <input type="checkbox" className="mr-1 cursor-pointer" />
-                Click me {/* remember me */}
-              </label>
-              <Link
-                to="/forgot_password"
-                className="underline mx-3 text-black hover:no-underline hover:opacity-700 "
-              >
-                ForgotPassword?
-              </Link>
-            </div>
             <button
               type="submit"
               className="my-3 w-full px-10 rounded bg-blue-900 font-semibold hover:bg-blue-500"
             >
-              Login
+              Submit Email
             </button>
             <div className="flex justify-between">
-              <p>Without Account?</p>
               <Link
-                to="/register"
-                className="underline mx-3 text-black hover:no-underline hover:opacity-700 "
+                to="/login"
+                className="underline mx-3 text-black hover:no-underline hover:opacity-700 relative"
               >
-                Register
+                <IoIosArrowBack className="absolute bottom-1 right-0 size-8" />
               </Link>
+              Back to Login page
             </div>
           </form>
         </div>
@@ -119,4 +84,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;

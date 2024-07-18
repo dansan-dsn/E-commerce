@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineEmail } from "react-icons/md";
 import Password from "../components/Password";
-import backgroundImg from "../assets/images/pexels-karolina-grabowska-5632382.jpg";
+import backgroundImg from "../assets/images/shop.jpg";
 import useImage from "../assets/images/shopping cart.jpeg";
 import { validatePassword, validateEmail } from "../utils/validator";
 
