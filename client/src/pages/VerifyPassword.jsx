@@ -27,31 +27,31 @@ const VerifyPassword = () => {
               <input
                 type="text"
                 maxLength="1"
-                className="w-10 h-10 text-center border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 p-2 rounded mr-3 hide-caret"
+                className="w-10 h-10 text-center bg-white border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 p-2 rounded mr-3 hide-caret"
                 placeholder="_"
               />
               <input
                 type="text"
                 maxLength="1"
-                className="w-10 h-10 text-center border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 p-2 rounded mr-3 hide-caret"
+                className="w-10 h-10 text-center bg-white border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 p-2 rounded mr-3 hide-caret"
                 placeholder="_"
               />
               <input
                 type="text"
                 maxLength="1"
-                className="w-10 h-10 text-center border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 p-2 rounded mr-3 hide-caret"
+                className="w-10 h-10 text-center bg-white border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 p-2 rounded mr-3 hide-caret"
                 placeholder="_"
               />
               <input
                 type="text"
                 maxLength="1"
-                className="w-10 h-10 text-center border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 p-2 rounded mr-3 hide-caret"
+                className="w-10 h-10 text-center bg-white border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 p-2 rounded mr-3 hide-caret"
                 placeholder="_"
               />
               <input
                 type="text"
                 maxLength="1"
-                className="w-10 h-10 text-center border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 p-2 rounded mr-3 hide-caret"
+                className="w-10 h-10 text-center bg-white border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 p-2 rounded mr-3 hide-caret"
                 placeholder="_"
               />
             </label>

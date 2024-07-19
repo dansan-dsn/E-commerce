@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineEmail } from "react-icons/md";
-import backgroundImg from "../assets/images/pexels-karolina-grabowska-5632382.jpg";
+import backgroundImg from "../assets/images/b1.jpg";
 import useImage from "../assets/images/shopping cart.jpeg";
 import { validateEmail } from "../utils/validator";
 import { IoIosArrowBack } from "react-icons/io";

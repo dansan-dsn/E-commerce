@@ -1,21 +1,32 @@
-import React from "react";
-import { MdArrowDropDown } from "react-icons/md";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Search from "./Search";
+import { MdArrowDropDown } from "react-icons/md";
+import Profile from "../components/Profile";
+import Orders from "./Orders";
 
 const Navbar = () => {
+  const [querySearch, setQuerySearch] = useState("");
+  let name = "d.s.n";
+
   return (
-    <div>
-      <nav className="fixed p-1 border border-blue-800 m-5 mr-40 flex">
-        {/* <h1 className="text-fuchsia-900 text-xl font-bold">d.s.n AccShop</h1> */}
-        {/* <ul className="text-white">
-          <li className="border rounded-full cursor-pointer bg-fuchsia-950 px-3 text-center relative">
-            Trendig
-            <MdArrowDropDown className="absolute bottom-1 right-0   " />
-          </li>
-        </ul> */}
-      </nav>
-      <Search />
-      <div></div>
+    <div className=" navbar bg-base-100">
+      <div className="flex-1">
+        <Link to="/" className="btn btn-ghost text-xl">
+          d.s.n
+        </Link>
+      </div>
+      <div>
+        <Search
+          value={querySearch}
+          onChange={(e) => setQuerySearch(e.target.value)}
+          onClearSearch={() => setQuerySearch("")}
+        />
+      </div>
+      <div className="flex-none navbar-end">
+        <Orders />
+        <Profile />
+      </div>
     </div>
   );
 };
