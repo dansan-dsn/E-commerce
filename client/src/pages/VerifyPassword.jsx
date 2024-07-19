@@ -1,11 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import backgroundImg from "../assets/images/lock.jpg";
 import useImage from "../assets/images/shopping cart.jpeg";
 
 const VerifyPassword = () => {
-  //   const navigate = useNavigate();
-  //   navigate("/");
   return (
     <>
       <div
