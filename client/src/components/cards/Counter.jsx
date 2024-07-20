@@ -3,14 +3,14 @@ import img from "../../assets/images/shopping cart.jpeg";
 import { MdDeleteSweep } from "react-icons/md";
 
 const Counter = ({ handleDelete }) => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
   const handleIncrement = () => {
     setCount(count + 1);
   };
 
   const handleDecrement = () => {
-    setCount(count - 1);
+    if (count > 1) setCount(count - 1);
   };
 
   return (
