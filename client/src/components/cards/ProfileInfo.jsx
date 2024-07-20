@@ -16,7 +16,12 @@ const ProfileInfo = ({ onLogout }) => {
         title="profile"
         onClick={handleModal}
       />
-      {isModalOpen && <ProfileModal />}
+      {isModalOpen && (
+        <ProfileModal
+          isOpen={isModalOpen}
+          setIsOpen={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   );
 };
