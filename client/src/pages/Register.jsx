@@ -70,7 +70,7 @@ const Register = () => {
             onSubmit={handleRegistration}
           >
             <label htmlFor="email" className="mb-5 relative flex text-gray-400">
-              <MdOutlineEmail className="absolute left-1 top-4 size-6" />
+              <MdOutlineEmail className="absolute left-1 top-2 size-6" />
               <input
                 type="email"
                 value={email}

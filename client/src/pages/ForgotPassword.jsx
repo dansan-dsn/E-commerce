@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineEmail } from "react-icons/md";
-import backgroundImg from "../assets/images/b1.jpg";
+import backgroundImg from "../assets/images/shop.jpg";
 import useImage from "../assets/images/shopping cart.jpeg";
 import { validateEmail } from "../utils/validator";
 import { IoIosArrowBack } from "react-icons/io";
@@ -51,7 +51,7 @@ const ForgotPassword = () => {
             onSubmit={handlePasswordReset}
           >
             <label htmlFor="email" className="mb-5 relative flex text-gray-400">
-              <MdOutlineEmail className="absolute left-1 top-4 size-6" />
+              <MdOutlineEmail className="absolute left-1 top-2 size-6" />
               <input
                 type="email"
                 id="email"
@@ -59,7 +59,7 @@ const ForgotPassword = () => {
                 name="email"
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
-                className="py-2 rounded px-8 w-full bg-slate-300 text-neutral-700"
+                className="py-2 rounded px-8 w-full bg-slate-300 text-neutral-700 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-red-500 focus:invalid:ring-pink-500"
               />
             </label>
             <button

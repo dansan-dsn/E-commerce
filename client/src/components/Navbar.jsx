@@ -1,31 +1,67 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Search from "./Search";
-import { MdArrowDropDown } from "react-icons/md";
-import Profile from "../components/Profile";
-import Orders from "./Orders";
+import SearchBar from "./SearchBar";
+import ProfileInfo from "./cards/ProfileInfo";
+import Cart from "./cards/Cart";
+import { IoClose } from "react-icons/io5";
 
 const Navbar = () => {
   const [querySearch, setQuerySearch] = useState("");
-  let name = "d.s.n";
+  const [isShowSearch, setIsShowSearch] = useState(true);
+  const [slowShow, setSlowShow] = useState(false);
+
+  const handleChange = (e) => {
+    setQuerySearch(e.target.value);
+  };
+
+  const handleClearSearch = () => {
+    setQuerySearch("");
+  };
+
+  const handleClick = () => {
+    setIsShowSearch(false);
+    setSlowShow(true);
+  };
+
+  const hanldeClose = () => {
+    setSlowShow(false);
+    setIsShowSearch(true);
+  };
 
   return (
-    <div className=" navbar bg-base-100">
-      <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl">
+    <div className="bg-gray-200 p-4">
+      <div className="container mx-auto flex xs:justify-between items-center">
+        <Link to="/" className="text-lg font-bold">
           d.s.n
         </Link>
-      </div>
-      <div>
-        <Search
-          value={querySearch}
-          onChange={(e) => setQuerySearch(e.target.value)}
-          onClearSearch={() => setQuerySearch("")}
-        />
-      </div>
-      <div className="flex-none navbar-end">
-        <Orders />
-        <Profile />
+        <div className="flex-grow relative">
+          {isShowSearch && (
+            <SearchBar
+              value={querySearch}
+              onChange={handleChange}
+              onClearSearch={handleClearSearch}
+              handleSearch={handleClick}
+            />
+          )}
+          {slowShow && (
+            <div className="relative w-full px-4 py-2 ">
+              <IoClose
+                className="xs:hidden grid right-10 -bottom-2.5 absolute justify-center"
+                onClick={hanldeClose}
+              />
+              <div className="overflow-hidden opacity-50 transform translate-y-0 block">
+                <SearchBar
+                  value={querySearch}
+                  onChange={handleChange}
+                  onClearSearch={handleClearSearch}
+                  handleSearch={handleClick}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+        <ProfileInfo />
+        <Cart />
       </div>
     </div>
   );

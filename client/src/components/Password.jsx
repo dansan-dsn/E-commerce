@@ -12,7 +12,7 @@ const Password = ({ placeholder, onChange, value }) => {
   return (
     <div>
       <label htmlFor="password" className="mb-5 relative flex text-gray-400">
-        <TbPasswordMobilePhone className="absolute left-1 top-4 size-6" />
+        <TbPasswordMobilePhone className="absolute left-1 top-2 size-6" />
         <input
           type={showPassword ? "text" : "password"}
           id="password"
@@ -24,13 +24,13 @@ const Password = ({ placeholder, onChange, value }) => {
         />
         {showPassword ? (
           <FaRegEyeSlash
-            className="absolute right-2 top-4 size-5 cursor-pointer"
+            className="absolute right-2 top-3 size-5 cursor-pointer"
             onClick={handleTogglePassword}
             title="Hide password"
           />
         ) : (
           <FaRegEye
-            className="absolute right-2 top-4 size-5 cursor-pointer"
+            className="absolute right-2 top-3 size-5 cursor-pointer"
             onClick={handleTogglePassword}
             title="Show password"
           />
