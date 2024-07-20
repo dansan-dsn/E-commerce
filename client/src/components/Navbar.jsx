@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import ProfileInfo from "./cards/ProfileInfo";
 import Cart from "./cards/Cart";
-import { IoClose } from "react-icons/io5";
+import { CgMenuGridR } from "react-icons/cg";
 
 const Navbar = () => {
   const [querySearch, setQuerySearch] = useState("");
@@ -19,6 +19,7 @@ const Navbar = () => {
   return (
     <div className="bg-gray-200 p-4">
       <div className="container mx-auto flex xs:justify-between items-center">
+        <CgMenuGridR className="size-10 mr-10 cursor-pointer" />
         <Link to="/" className="text-lg font-bold">
           d.s.n
         </Link>

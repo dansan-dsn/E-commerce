@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { IoIosSearch, IoIosCloseCircle } from "react-icons/io";
+import { IoIosCloseCircle } from "react-icons/io";
+import { FaSearch } from "react-icons/fa";
 
 const SearchBar = ({ value, onChange, onClearSearch }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -16,8 +17,8 @@ const SearchBar = ({ value, onChange, onClearSearch }) => {
   return (
     <div className="">
       <div className="flex my-3 justify-center">
-        <IoIosSearch
-          className="mt-2 -mr-8 size-10 xs:size-6 cursor-pointer opacity-60 xs:pointer-events-none "
+        <FaSearch
+          className="xs:mt-3 -mr-8 size-7 xs:size-5 cursor-pointer opacity-30 xs:pointer-events-none "
           onClick={searchClick}
         />
         {isSearchOpen && (
