@@ -17,7 +17,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-gray-200 p-4">
+    <div className="bg-slate-300 p-4">
       <div className="container mx-auto flex xs:justify-between items-center">
         <CgMenuGridR className="size-10 mr-10 cursor-pointer" />
         <Link to="/" className="text-lg font-bold">

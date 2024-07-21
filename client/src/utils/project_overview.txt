@@ -10,12 +10,14 @@ Home layout
  |	 |	      |_Whishlist and saved items
  |	 |	      |_Payment methods, cards and hstry
  |	 |	      |_security and privacy
- |	 |	      |_support and feedback(FaQs, help, issues
+ |	 |	      |_support and feedback(FaQs, help, issues)
  |	 |	      |_responsive, light, loading indicators
  |	 |_Logo
  |	 |_Search|_autocomplete
  |	 |_profile
  |	 |_carts
- |_categories|_
+ |_categories|_Hero banner|_carousel
+	     |_Trending products
+	     |_side filter(price, brand, rating...)
 	     |_
 	    
