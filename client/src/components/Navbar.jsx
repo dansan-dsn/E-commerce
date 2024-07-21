@@ -4,6 +4,7 @@ import SearchBar from "./SearchBar";
 import ProfileInfo from "./cards/ProfileInfo";
 import Cart from "./cards/Cart";
 import { CgMenuGridR } from "react-icons/cg";
+import logo from "../assets/logo.svg";
 
 const Navbar = () => {
   const [querySearch, setQuerySearch] = useState("");
@@ -21,7 +22,7 @@ const Navbar = () => {
       <div className="container mx-auto flex xs:justify-between items-center">
         <CgMenuGridR className="size-10 mr-10 cursor-pointer" />
         <Link to="/" className="text-lg font-bold">
-          d.s.n
+          <img src={logo} className="size-20 rounded-full" />
         </Link>
         <div className="flex-grow relative">
           <SearchBar

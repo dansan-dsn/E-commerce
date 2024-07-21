@@ -12,7 +12,7 @@ const ProfileInfo = ({ onLogout }) => {
   return (
     <div className="mx-1">
       <IoPerson
-        className="cursor-pointer text-2xl hover:text-gray-500"
+        className="cursor-pointer text-2xl hover:text-gray-500 mt-1"
         title="profile"
         onClick={handleModal}
       />
