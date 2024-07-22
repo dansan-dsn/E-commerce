@@ -75,11 +75,11 @@ const Cart = () => {
   return (
     <div>
       <div className="flex cursor-pointer relative mx-2 mt-1">
-        <div className="absolute text-stone-800 ml-5 -mt-2 font-extrabold text-xs z-20 px-1 bg-white rounded-full">
+        <div className="absolute text-stone-800 ml-5 -mt-2 font-extrabold text-xs z-10 px-1 bg-white rounded-full">
           {totalItems}
         </div>
         <FaShoppingCart
-          className="text-2xl mr-4 hover:text-gray-500 delay-75 z-20 "
+          className="text-2xl mr-4 hover:text-gray-500 delay-75 z-10 "
           onMouseEnter={handleToggleCart}
           title="Cart"
         />

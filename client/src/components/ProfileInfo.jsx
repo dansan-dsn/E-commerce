@@ -1,12 +1,20 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { IoPerson, IoClose } from "react-icons/io5";
 import ProfileModal from "./cards/ProfileModal";
 
-const ProfileInfo = ({ onLogout }) => {
+const ProfileInfo = () => {
   const [isModalOpen, setIsModalOpen] = useState("");
+  const navigate = useNavigate();
 
   const handleModal = () => {
     setIsModalOpen(!isModalOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    sessionStorage.removeItem("authToken");
+    navigate("/login");
   };
 
   return (
@@ -20,6 +28,7 @@ const ProfileInfo = ({ onLogout }) => {
         <ProfileModal
           isOpen={isModalOpen}
           setIsOpen={() => setIsModalOpen(false)}
+          handleLogout={handleLogout}
         />
       )}
     </div>
