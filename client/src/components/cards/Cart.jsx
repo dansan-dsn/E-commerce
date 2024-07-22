@@ -79,7 +79,7 @@ const Cart = () => {
           {totalItems}
         </div>
         <FaShoppingCart
-          className="text-2xl mr-4 hover:text-gray-600 delay-75 z-20"
+          className="text-2xl mr-4 hover:text-gray-500 delay-75 z-20 "
           onMouseEnter={handleToggleCart}
           title="Cart"
         />

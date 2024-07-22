@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
-import ProfileInfo from "./cards/ProfileInfo";
+import ProfileInfo from "./ProfileInfo";
 import Cart from "./cards/Cart";
 import { CgMenuGridR } from "react-icons/cg";
 import logo from "../assets/logo.svg";

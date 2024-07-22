@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IoPerson, IoClose } from "react-icons/io5";
-import ProfileModal from "../ProfileModal";
+import ProfileModal from "./cards/ProfileModal";
 
 const ProfileInfo = ({ onLogout }) => {
   const [isModalOpen, setIsModalOpen] = useState("");
@@ -12,7 +12,7 @@ const ProfileInfo = ({ onLogout }) => {
   return (
     <div className="mx-1">
       <IoPerson
-        className="cursor-pointer text-2xl hover:text-gray-500 mt-1"
+        className="cursor-pointer size-12 mt-1 hover:bg-gray-400 p-2 rounded-full "
         title="profile"
         onClick={handleModal}
       />
