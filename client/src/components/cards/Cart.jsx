@@ -75,12 +75,12 @@ const Cart = () => {
   return (
     <div>
       <div className="flex cursor-pointer relative mx-2 mt-1">
-        <div className="absolute text-stone-800 ml-5 -mt-2 font-extrabold text-xs z-10 px-1 bg-white rounded-full">
+        <div className="absolute text-stone-800 ml-8 mt-2 font-extrabold text-xs z-20 px-1 bg-white rounded-full">
           {totalItems}
         </div>
         <FaShoppingCart
-          className="text-2xl mr-4 hover:text-gray-500 delay-75 z-10 "
-          onMouseEnter={handleToggleCart}
+          className="text-2xl mr-1 delay-75 z-10 size-12 mt-1 hover:bg-gray-400 p-2 rounded-full"
+          onClick={handleToggleCart}
           title="Cart"
         />
       </div>
@@ -90,7 +90,7 @@ const Cart = () => {
         }`}
       >
         <div
-          className={`bg-gray-300 shadow-2xl m-3 w-5/6 md:w-1/3 h-[600px] right-0 absolute top-3 rounded-sm transition-transform duration-300 ease-in-out transform ${
+          className={`bg-gray-300 shadow-2xl m-3 w-5/6 md:w-1/3 h-[600px] right-0 absolute top-1 rounded-sm transition-transform duration-300 ease-in-out transform ${
             isCartOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >

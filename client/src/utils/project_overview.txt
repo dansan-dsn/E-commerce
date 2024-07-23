@@ -4,20 +4,27 @@ Login|_Forgot password|_reset password|_OTP*
 Home layout
  |_navBar
  |	 |_Toggle menu|_Personal  Info
- |	 |	      |_Orders(histry and mgt)
- |	 |	      |_Accout setngs(prs info , mng)
- |	 |	      |_Preference, notify, lang, theme
- |	 |	      |_Whishlist and saved items
- |	 |	      |_Payment methods, cards and hstry
- |	 |	      |_security and privacy
- |	 |	      |_support and feedback(FaQs, help, issues)
+ |	 |	      |_Orders(histry and mgt)*
+ |	 |	      |_(prs info , mng)(**account)
+ |	 |	      |_Preference, notify, lang, theme(**)
+ |	 |	      |_Whishlist and saved items(**account)
+ |	 |	      |_Payment methods, cards and hstry(**account)
+ |	 |	      |_security and privacy(**help)
+ |	 |	      |_support and feedback(FaQs, **help, issues)
  |	 |	      |_responsive, light, loading indicators
+ |   |  	  |__**_Account
+ |   | 		  |__**Dashbord
+ |   | 		  |__**_Categories
+ |   | 		  |__**Orders
+ |   | 		  |__**_Help(Contact Us)
  |	 |_Logo
  |	 |_Search|_autocomplete
  |	 |_profile
  |	 |_carts
- |_categories|_Hero banner|_carousel
+Landig Page 
+   |_categories
+         |_Hero banner|_carousel
 	     |_Trending products
 	     |_side filter(price, brand, rating...)
-	     |_
+	     |_Top Offers
 	    

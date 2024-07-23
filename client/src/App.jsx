@@ -1,12 +1,17 @@
 import react, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Loader from "./components/cards/Loader";
+import NotFound from "./pages/NotFound";
+import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import NotFound from "./pages/NotFound";
 import ForgotPassword from "./pages/ForgotPassword";
 import VerifyPassword from "./pages/VerifyPassword";
+import Orders from "./pages/Orders";
+import Categories from "./pages/Categories";
+import Account from "./pages/Account";
+import Help from "./pages/Help";
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -29,7 +34,8 @@ const App = () => {
         ) : (
           <Routes>
             <Route path="*" element={<NotFound />} />
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Landing />} />
+            <Route path="/dashboard" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot_password" element={<ForgotPassword />} />
@@ -37,6 +43,10 @@ const App = () => {
               path="/forgot_password/verify"
               element={<VerifyPassword />}
             />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/contact-us" element={<Help />} />
           </Routes>
         )}
       </BrowserRouter>
