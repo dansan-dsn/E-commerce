@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="sticky top-0 left-0 w-full bg-slate-300 z-50 p-1 shadow-gray-400 shadow-lg">
+    <div className="sticky top-0 left-0 w-full bg-gray-300 z-50 p-1 shadow-gray-400 shadow-lg">
       <div className="container mx-auto flex flex-col xs:justify-between items-center relative">
         <div className="flex w-full items-center justify-between">
           <RxDropdownMenu
@@ -50,41 +50,37 @@ const Navbar = () => {
           <Cart />
         </div>
         <div
-          className={`w-full bg-slate-300 transition-all duration-300 ease-in-out overflow-hidden ${
+          className={`w-full bg-gray-300 transition-all duration-300 ease-in-out overflow-hidden ${
             isMenu ? "max-h-20" : "max-h-0"
           }`}
         >
-          <div className="flex justify-center items-center py-2">
-            <Link
-              to="/dashboard"
-              className="text-black text-sm font-semibold hover:text-gray-500 mx-2"
-            >
-              Dashboard
-            </Link>
-            <Link
-              to="/orders"
-              className="text-black text-sm font-semibold hover:text-gray-500 mx-2"
-            >
-              Orders
-            </Link>
-            <Link
-              to="/categories"
-              className="text-black text-sm font-semibold hover:text-gray-500 mx-2"
-            >
-              Categories
-            </Link>
-            <Link
-              to="/account"
-              className="text-black text-sm font-semibold hover:text-gray-500 mx-2"
-            >
-              Account
-            </Link>
-            <Link
-              to="/contact-us"
-              className="text-black text-sm font-semibold hover:text-gray-500 mx-2"
-            >
-              Help
-            </Link>
+          <div className="flex justify-center">
+            <div className="flex justify-center items-center py-2 bg-gray-400 rounded-full">
+              <Link
+                to="/dashboard"
+                className="text-white text-sm font-semibold bg-gray-600 hover:bg-gray-500  rounded-full py-2 px-2 mx-2"
+              >
+                Dashboard
+              </Link>
+              <Link
+                to="/categories"
+                className="text-white text-sm font-semibold bg-gray-600 hover:bg-gray-500  rounded-full py-2 px-2 mr-2 "
+              >
+                Categories
+              </Link>
+              <Link
+                to="/account"
+                className="text-white text-sm font-semibold bg-gray-600 hover:bg-gray-500  rounded-full py-2 px-2 mr-2"
+              >
+                Account
+              </Link>
+              <Link
+                to="/contact-us"
+                className="text-white text-sm font-semibold bg-gray-600 hover:bg-gray-500  rounded-full py-2 px-2 mr-2"
+              >
+                Help
+              </Link>
+            </div>
           </div>
         </div>
       </div>

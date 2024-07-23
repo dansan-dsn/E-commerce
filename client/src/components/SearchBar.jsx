@@ -30,9 +30,10 @@ const SearchBar = ({ value, onChange, onClearSearch }) => {
               className="w-full p-4 bg-white rounded-md shadow-lg transform transition-all duration-300"
               onClick={(e) => e.stopPropagation()}
             >
-              <label htmlFor="">
+              <label htmlFor="search">
                 <input
                   type="text"
+                  id="search"
                   name="search"
                   value={value}
                   onChange={onChange}
