@@ -18,12 +18,12 @@ const SearchBar = ({ value, onChange, onClearSearch }) => {
     <div className="">
       <div className="flex my-3 justify-center">
         <FaSearch
-          className="xs:mt-3 -mr-8 size-7 xs:size-5 cursor-pointer opacity-30 xs:pointer-events-none "
+          className="xs:mt-3 -mr-8 size-7 text-gray-400 xs:size-5 cursor-pointer opacity-30 xs:pointer-events-none "
           onClick={searchClick}
         />
         {isSearchOpen && (
           <div
-            className="fixed inset-0 z-50 flex items-start justify-center p-4 bg-black bg-opacity-50 xs:hidden"
+            className="fixed inset-0 z-50 flex items-start justify-center p-4 bg-opacity-50 xs:hidden"
             onClick={closeSearch}
           >
             <div
@@ -37,7 +37,7 @@ const SearchBar = ({ value, onChange, onClearSearch }) => {
                   name="search"
                   value={value}
                   onChange={onChange}
-                  className="w-full relative border-2 border-blue-300 pr-10 py-2 rounded outline-none text-gray-400"
+                  className="w-full relative  border-2 border-blue-300 pr-10 py-2 rounded outline-none text-gray-400"
                   placeholder="Search.."
                 />
                 {value && (
@@ -55,7 +55,7 @@ const SearchBar = ({ value, onChange, onClearSearch }) => {
           name="search"
           value={value}
           onChange={onChange}
-          className="border-2 border-blue-300 py-2 rounded w-1/2 pl-8 pr-10 outline-none text-gray-400 hidden xs:block"
+          className="border-2 border-blue-300 py-2 rounded w-1/2 pl-8 pr-10 outline-none text-gray-400 hidden xs:block bg-slate-800"
           placeholder="Search.."
         />
         {value && (

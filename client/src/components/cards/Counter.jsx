@@ -7,7 +7,7 @@ const Counter = ({ items, handleIncrement, handleDecrement, handleDelete }) => {
       {items.map((item, index) => (
         <div
           key={item.id}
-          className="mx-2 mt-1 border bg-white flex justify-between p-3 relative"
+          className="mx-2 mt-1 border bg-gray-300 flex justify-between p-3 relative"
         >
           <MdDeleteSweep
             className="absolute top-1 right-1 cursor-pointer text-red-700 size-6"

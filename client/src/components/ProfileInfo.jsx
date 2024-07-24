@@ -20,7 +20,7 @@ const ProfileInfo = () => {
   return (
     <div className="mx-1">
       <IoPerson
-        className="cursor-pointer size-12 mt-1 hover:bg-gray-400 p-2 rounded-full "
+        className="cursor-pointer size-12 mt-1 hover:bg-gray-400 p-2 text-gray-500 rounded-full "
         title="profile"
         onClick={handleModal}
       />

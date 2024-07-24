@@ -79,7 +79,7 @@ const Cart = () => {
           {totalItems}
         </div>
         <FaShoppingCart
-          className="text-2xl mr-1 delay-75 z-10 size-12 mt-1 hover:bg-gray-400 p-2 rounded-full"
+          className="text-2xl mr-1 delay-75 z-10 size-12 mt-1 hover:bg-gray-400 p-2 rounded-full text-gray-500"
           onClick={handleToggleCart}
           title="Cart"
         />
@@ -90,7 +90,7 @@ const Cart = () => {
         }`}
       >
         <div
-          className={`bg-gray-300 shadow-2xl m-3 w-5/6 md:w-1/3 h-[600px] right-0 absolute top-1 rounded-sm transition-transform duration-300 ease-in-out transform ${
+          className={`bg-gray-500 shadow-2xl m-3 w-5/6 md:w-1/3 h-[600px] right-0 absolute top-1 rounded-sm transition-transform duration-300 ease-in-out transform ${
             isCartOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
@@ -111,7 +111,7 @@ const Cart = () => {
                 Your cart is empty
               </p>
               <a
-                href="/"
+                href="/dashboard"
                 className="absolute top-96 mt-20 btn btn-outline cursor-pointer xs:hover:btn-primary "
               >
                 Let's Go shopping
@@ -127,7 +127,7 @@ const Cart = () => {
                   handleDelete={handleDelete}
                 />
               </div>
-              <div className="mx-2 p-3 bg-white">
+              <div className="mx-2 p-3 bg-gray-300">
                 <div className="flex justify-between my-2">
                   <p className="font-semibold">Subtotal:</p>
                   <p>${subtotal.toFixed(2)}</p>

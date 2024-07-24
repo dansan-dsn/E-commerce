@@ -47,7 +47,7 @@ const ProfileModal = ({ isOpen, setIsOpen, handleLogout }) => {
           onClick={hanldeClose}
         >
           <div
-            className="relative bg-slate-200 rounded-lg shadow-lg h-[550px]"
+            className="relative bg-gray-300 rounded-lg shadow-lg h-[550px]"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="w-[330px] rounded-t-lg bg-slate-900 relative h-36">
@@ -93,7 +93,7 @@ const ProfileModal = ({ isOpen, setIsOpen, handleLogout }) => {
                   onChange={uploadImage}
                 />
               </div>
-              <div className="mt-28">
+              <div className="mt-28 ">
                 <div className="flex justify-between px-8 mt-3">
                   <span className="text-xl font-semibold">Name:</span>
                   <span className="text-gray-600">{name}</span>
@@ -147,7 +147,7 @@ const ProfileModal = ({ isOpen, setIsOpen, handleLogout }) => {
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="border-2 border-blue-300  rounded outline-none text-gray-400 w-[200px]"
+                        className="border-2 border-blue-300  rounded outline-none text-gray-400 w-[200px] bg-gray-100"
                         placeholder="Name"
                         maxLength="10"
                       />
@@ -159,7 +159,7 @@ const ProfileModal = ({ isOpen, setIsOpen, handleLogout }) => {
                         type="text"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="border-2 border-blue-300 rounded outline-none text-gray-400 w-[200px]"
+                        className="border-2 border-blue-300 rounded outline-none text-gray-400 w-[200px] bg-gray-100"
                         placeholder="Name"
                         maxLength="10"
                       />
@@ -171,7 +171,7 @@ const ProfileModal = ({ isOpen, setIsOpen, handleLogout }) => {
                         type="text"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        className="border-2 border-blue-300 py-2 rounded outline-none text-gray-400 w-[200px]"
+                        className="border-2 border-blue-300 py-2 rounded outline-none text-gray-400 w-[200px] bg-gray-100"
                         placeholder="Name"
                         maxLength="10"
                       />
@@ -183,7 +183,7 @@ const ProfileModal = ({ isOpen, setIsOpen, handleLogout }) => {
                         type="text"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
-                        className="border-2 border-blue-300 rounded outline-none text-gray-400 w-[200px]"
+                        className="border-2 border-blue-300 rounded outline-none text-gray-400 w-[200px] bg-gray-100"
                         placeholder="Name"
                         maxLength="10"
                       />
@@ -195,7 +195,7 @@ const ProfileModal = ({ isOpen, setIsOpen, handleLogout }) => {
                         type="text"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
-                        className="border-2 border-blue-300 rounded outline-none text-gray-400 w-[200px]"
+                        className="border-2 border-blue-300 rounded outline-none text-gray-400 w-[200px] bg-gray-100"
                         placeholder="Name"
                         maxLength="10"
                       />

@@ -19,7 +19,7 @@ const VerifyPassword = () => {
     const otp = code.join("");
     setMessage(`Entered OTP: ${otp}`);
     if (otp === "12345") {
-      navigate("/");
+      navigate("/dashboard");
     } else {
       setMessage("Invalid OTP. Please try again.");
     }
