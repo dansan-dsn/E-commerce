@@ -25,6 +25,11 @@ Landig Page
    |_categories
          |_Hero banner|_carousel
 	     |_Trending products
-	     |_side filter(price, brand, rating...)
+          |_New Arrivals, Top rated
+          |_Smart phones, Laptops, Tvs, Chargers, 
+          |_(speakers, Home theater, camera, Audio, vidi), 
+	     |_side filter(price, brand, rating...)**
 	     |_Top Offers
+          |_Reviews
+          |_footer
 	    

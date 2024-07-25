@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Carousel from "../components/Carousel";
+import Items from "../components/cards/Items";
 
 const Home = () => {
   return (
@@ -9,12 +10,15 @@ const Home = () => {
       <Navbar />
       <div className="flex-grow overflow-y-auto ">
         <div className="bg-blue-300 ">
-          <div className="text-center bg-amber-600 mt-1">
+          <div className="text-center bg-fuchsia-600 mt-1">
             <h1 className="p-3 text-center uppercase font-bold">
-              Treding Products
+              products on Discount
             </h1>
           </div>
           <Carousel />
+          <div>
+            <Items />
+          </div>
         </div>
       </div>
     </div>

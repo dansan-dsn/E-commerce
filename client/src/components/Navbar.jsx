@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="sticky top-0 left-0 w-full bg-gray-900 z-50 p-1 shadow-gray-400 shadow">
+    <div className="sticky top-0 left-0 w-full bg-gray-900 z-50 py-3 px-1 shadow-gray-400 shadow">
       <div className="container mx-auto flex flex-col xs:justify-between items-center relative">
         <div className="flex w-full items-center justify-between">
           <RxDropdownMenu
@@ -60,7 +60,7 @@ const Navbar = () => {
                 to="/dashboard"
                 className={({ isActive }) =>
                   `text-white text-sm font-semibold  hover:bg-gray-700  rounded-full py-2 px-2 mx-2 md:px-14 md:py-3 ${
-                    isActive ? "bg-sky-700" : "bg-gray-600"
+                    isActive ? "bg-sky-700 hover:bg-sky-800" : "bg-gray-600"
                   }`
                 }
               >
@@ -69,8 +69,10 @@ const Navbar = () => {
               <NavLink
                 to="/categories"
                 className={({ isActive }) =>
-                  `text-white text-sm font-semibold  hover:bg-gray-700  rounded-full py-2 px-2 mr-2 md:px-14 md:py-3 ${
-                    isActive ? "bg-sky-700" : "bg-gray-600"
+                  `text-white text-sm font-semibold    rounded-full py-2 px-2 mr-2 md:px-14 md:py-3 ${
+                    isActive
+                      ? "bg-sky-700 hover:bg-sky-800"
+                      : "bg-gray-600 hover:bg-gray-700"
                   }`
                 }
               >
@@ -80,7 +82,7 @@ const Navbar = () => {
                 to="/account"
                 className={({ isActive }) =>
                   `text-white text-sm font-semibold  hover:bg-gray-700  rounded-full py-2 px-2 mr-2 md:px-14 md:py-3 ${
-                    isActive ? "bg-sky-700" : "bg-gray-600"
+                    isActive ? "bg-sky-700 hover:bg-sky-800" : "bg-gray-600"
                   }`
                 }
               >
@@ -90,7 +92,7 @@ const Navbar = () => {
                 to="/contact-us"
                 className={({ isActive }) =>
                   `text-white text-sm font-semibold  hover:bg-gray-700  rounded-full py-2 px-2 mr-2 md:px-14 md:py-3 ${
-                    isActive ? "bg-sky-700" : "bg-gray-600"
+                    isActive ? "bg-sky-700 hover:bg-sky-800" : "bg-gray-600"
                   }`
                 }
               >
