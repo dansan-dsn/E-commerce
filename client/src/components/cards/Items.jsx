@@ -1,21 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import img from "../../assets/images/back1.jpg";
+import img from "../../assets/images/flash1.png";
+import img2 from "../../assets/images/phone1.png";
 
 const Items = () => {
   const [products, setProducts] = useState([
     {
       id: 1,
       image: img,
-      category: "USB",
+      category: "flash",
       name: "Usb Aluminium type C",
       price: 20,
       discount: 10,
     },
     {
       id: 2,
+      image: img2,
+      category: "Phone",
+      name: "Usb Aluminium type C",
+      price: 20,
+      discount: 10,
+    },
+    {
+      id: 3,
       image: img,
-      category: "USB",
+      category: "flash",
+      name: "Usb Aluminium type C",
+      price: 20,
+      discount: 10,
+    },
+    {
+      id: 4,
+      image: img2,
+      category: "Phone",
       name: "Usb Aluminium type C",
       price: 20,
       discount: 10,
@@ -41,17 +58,14 @@ const Items = () => {
           See All
         </Link>
       </div>
-      <div className=" flex gap-1">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-1">
         {products.map((product, index) => {
           return (
-            <div
-              key={product.id}
-              className="w-1/2 md:w-1/4 bg-gray-100 m-3 rounded"
-            >
+            <div key={product.id} className="bg-gray-100 m-3 rounded">
               <img
                 src={product.image}
                 alt={product.name}
-                className="rounded-t"
+                className="rounded-t h-32 md:h-48 "
               />
               <div className="flex flex-col p-3 relative">
                 <p className=" font-bold text-xl uppercase text-amber-700">

@@ -1,0 +1,68 @@
+uset tb|_id
+       |_username
+       |_password
+       |_email
+       |_address
+       |_phoneNumber
+       |_role(customer, customer)
+
+Products tb|_id
+           |_name
+           |_categoryId(foreign id of Categories)
+           |_image
+           |_description
+           |_price
+           |_stockQuantity
+           |_datedAdded
+
+Categories tb|_categoryId
+             |_name
+             |_description
+
+Order tb|_OderId
+        |_userId(foreign id of user)
+        |_productID(foreign id of product)
+        |_quatity of product ordered
+        |_price
+
+Reviews tb|_id
+          |_productID(foreign form product)
+          |_userid(foreign from user)
+          |_rating
+          |_comment
+          |_reviewDate
+
+Offers tb|_id
+         |_productID(foreign id from products)
+         |_original price(before offer)
+         |_offer price(discount price)
+         |_discount percentage
+         |_offerStart date
+         |_offerend date
+         |_offer terms
+
+Payment tb|_id
+          |_order id(foreign)
+          |_Payment date
+          |_Payment methods
+          |_Amount paid
+
+shipping tb|_id
+           |_order id(foreign id)
+           |_shipping date
+           |_carrier
+           |_trackingNumber
+
+cart tb|_id
+       |_userid(foreign user tb)
+       |_createdDate()
+
+cartItem tb|_id
+           |_cartid(foreign)
+           |_productID(foreign)
+           |_quatity
+
+new-arrivals(target the product tb, for date)
+Top offers(target offers with high discount)
+Trending(target the order items... number of times)
+Highly rated(average rating targeting the reviews)

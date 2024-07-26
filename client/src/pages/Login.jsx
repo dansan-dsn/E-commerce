@@ -27,7 +27,7 @@ const Login = () => {
     setEmail("");
     setPassword("");
     setError("");
-    navigate("/");
+    navigate("/dashboard");
   };
   return (
     <div

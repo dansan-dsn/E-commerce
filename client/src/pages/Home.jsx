@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Carousel from "../components/Carousel";
 import Items from "../components/cards/Items";
+import DisplayReview from "../components/cards/DisplayReview";
+import Reviews from "../components/Reviews";
 
 const Home = () => {
   return (
@@ -18,6 +20,8 @@ const Home = () => {
           <Carousel />
           <div>
             <Items />
+            <DisplayReview />
+            <Reviews />
           </div>
         </div>
       </div>
