@@ -28,7 +28,7 @@ const Navbar = () => {
       <div className="container mx-auto flex flex-col xs:justify-between items-center relative">
         <div className="flex w-full items-center justify-between">
           <RxDropdownMenu
-            className="size-10 mr-10 bg-gray-400 p-1 rounded hover:bg-gray-500 cursor-pointer"
+            className="size-10 mr-10 bg-gray-400 translate duration-300 ease-in-out hover:scale-110 p-1 rounded hover:bg-gray-500 cursor-pointer"
             title="Menu"
             onClick={handleMenu}
           />
