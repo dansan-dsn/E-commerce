@@ -5,6 +5,7 @@ import Carousel from "../components/Carousel";
 import Items from "../components/cards/Items";
 import DisplayReview from "../components/cards/DisplayReview";
 import Reviews from "../components/Reviews";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
@@ -18,11 +19,10 @@ const Home = () => {
             </h1>
           </div>
           <Carousel />
-          <div>
-            <Items />
-            <DisplayReview />
-            <Reviews />
-          </div>
+          <Items />
+          <DisplayReview />
+          <Reviews />
+          <Footer />
         </div>
       </div>
     </div>

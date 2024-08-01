@@ -28,12 +28,12 @@ const Reviews = () => {
   }, []);
 
   return (
-    <div className="m-3">
+    <div className="m-0">
       <div className="p-3">
-        <h1 className="text-center text-2xl font-bold my-1 text-purple-800 uppercase">
+        <h1 className="text-center text-2xl font-bold my-1 text-gray-800 uppercase">
           Testimonials
         </h1>
-        <div className="relative flex overflow-hidden py-10">
+        <div className="relative flex overflow-hidden py-10 bg-slate-400 rounded">
           <div
             className="flex transition-transform duration-500 ease-in-out"
             style={{
@@ -63,18 +63,20 @@ const Reviews = () => {
               </div>
             ))}
           </div>
-          <button
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-green-950 text-white rounded-full p-2 transition-transform duration-300 ease-in-out hover:scale-105"
-            onClick={prevPreview}
-          >
-            &#10094;
-          </button>
-          <button
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-green-950 text-white rounded-full p-2 transition-transform duration-300 ease-in-out hover:scale-105"
-            onClick={nextPreview}
-          >
-            &#10095;
-          </button>
+          {/* <div className="relative">
+            <button
+              className="absolute  transform -translate-y-1/2 bg-green-950 text-white rounded-full p-2 transition-transform duration-300 ease-in-out hover:scale-105"
+              onClick={prevPreview}
+            >
+              &#10094;
+            </button>
+            <button
+              className="absolute transform -translate-y-1/2 bg-green-950 text-white rounded-full p-2 transition-transform duration-300 ease-in-out hover:scale-105"
+              onClick={nextPreview}
+            >
+              &#10095;
+            </button>
+          </div> */}
         </div>
       </div>
     </div>
