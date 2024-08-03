@@ -7,42 +7,44 @@ const footer = () => {
   return (
     <>
       <div className="bg-slate-700 p-5 text-white">
-        <div className="bg-slate-600 flex p-3 justify-around rounded">
-          <div className="p-2">
-            <h2 className="text-3xl font-extrabold my-5 uppercase text-center text-emerald-500">
+        <div className="bg-slate-600 flex p-3 justify-around rounded-t md:rounded ">
+          <div className="md:p-2">
+            <h2 className="md:text-3xl font-extrabold  my-5 uppercase text-center text-emerald-500">
               Shopping
             </h2>
-            <div className="flex gap-4">
+            <div className="flex gap-1 md:gap-4">
               <Link
                 to="/dashboard"
-                className="px-4 py-1 bg-transparent rounded-full border cursor-pointer hover:bg-red-400 hover:border-none"
+                className=" px-1 md:px-4 py-1 text-xs md:text-lg bg-transparent rounded-full border cursor-pointer hover:bg-red-400 hover:border-none"
               >
                 Shop Target
               </Link>
               <Link
                 to="/dashboard"
-                className="px-4 py-1 bg-transparent rounded-full border cursor-pointer hover:bg-red-400 hover:border-none"
+                className="px-1 md:px-4 py-1 text-xs md:text-lg bg-transparent rounded-full border cursor-pointer hover:bg-red-400 hover:border-none"
               >
                 Shop Overview
               </Link>
             </div>
           </div>
-          <div className="p-2 relative">
-            <h2 className="text-3xl font-extrabold my-5 uppercase text-center text-emerald-500">
+          <div className="md:p-2 relative">
+            <h2 className="md:text-3xl font-extrabold my-5 uppercase text-center text-emerald-500">
               Contact us
             </h2>
-            <Link
-              to="/contact-us"
-              className="px-4 py-1 bg-transparent rounded-full border cursor-pointer hover:bg-red-400 hover:border-none"
-            >
-              Reach out
-            </Link>
+            <div className="flex justify-end">
+              <Link
+                to="/contact-us"
+                className="px-1 md:px-4 py-1 text-xs md:text-lg bg-transparent rounded-full border cursor-pointer hover:bg-red-400 hover:border-none"
+              >
+                Reach out
+              </Link>
+            </div>
           </div>
         </div>
-        <nav className="bg-slate-500 flex justify-between px-20 py-4 relative z-40 mx-20 rounded-b-lg">
+        <nav className="bg-slate-500 flex justify-between md:px-20 py-4 relative z-40 md:mx-20 -mx-4 p-3 rounded-b-lg">
           <FaLuggageCart className="absolute top-2 left-56 text-9xl opacity-40 text-slate-600" />
           <div className="flex flex-col z-10">
-            <h2 className="text-2xl uppercase font-extrabold text-amber-900">
+            <h2 className="md:text-2xl uppercase font-extrabold text-amber-900">
               Learn
             </h2>
             <a
@@ -71,7 +73,7 @@ const footer = () => {
             </a>
           </div>
           <div className="flex flex-col z-10">
-            <h2 className="text-2xl uppercase font-extrabold text-amber-900">
+            <h2 className="md:text-2xl uppercase font-extrabold text-amber-900">
               Social
             </h2>
             <a
@@ -101,7 +103,7 @@ const footer = () => {
           </div>
 
           <div className="flex flex-col z-10">
-            <h2 className="text-2xl uppercase font-extrabold text-amber-900">
+            <h2 className="md:text-2xl uppercase font-extrabold text-amber-900">
               categories
             </h2>
             <p className="text-blue-700 opacity-100 ">Laptops</p>
@@ -110,7 +112,7 @@ const footer = () => {
             <p className="text-blue-700 opacity-100 ">Home Theater</p>
             <p className="text-blue-700 opacity-100 "></p>
           </div>
-          <div className="flex items-center flex-wrap font-extrabold z-10">
+          <div className="hidden items-center flex-wrap font-extrabold z-10">
             Our Products are kept in track.
             <br />
             Reachout Effectively
