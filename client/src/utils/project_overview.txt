@@ -12,10 +12,10 @@ Home layout
  |	 |	      |_security and privacy(**help)
  |	 |	      |_support and feedback(FaQs, **help, issues)
  |	 |	      |_responsive, light, loading indicators
- |   |  	  |__**_Account
+ |    |  | |  | | 
+ |   |  	  |__**_Account(Add username, more contact info, country, change password, address and street, orders, )
  |   | 		  |__**Dashbord
  |   | 		  |__**_Categories
- |   | 		  |__**Orders
  |   | 		  |__**_Help(Contact Us)
  |	 |_Logo
  |	 |_Search|_autocomplete
@@ -32,4 +32,3 @@ Landig Page
 	     |_Top Offers
           |_Reviews
           |_footer
-	    

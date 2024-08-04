@@ -86,7 +86,7 @@ const footer = () => {
               href=""
               className="text-blue-700 opacity-100 hover:underline hover:opacity-70 "
             >
-              Twitter(x)
+              X (twitter)
             </a>
             <a
               href=""
