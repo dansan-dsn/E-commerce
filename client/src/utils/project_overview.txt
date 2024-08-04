@@ -1,26 +1,35 @@
-Register|_use google, email..., password
-Login|_Forgot password|_reset password|_OTP*
+Register|_use google
+        |_ email..., password
+
+Login|_Forgot password
+     |_reset password
+     |_OTP*
      |_use google
+
 Home layout
  |_navBar
- |	 |_Toggle menu|_Personal  Info
- |	 |	      |_Orders(histry and mgt)*
- |	 |	      |_(prs info , mng)(**account)
- |	 |	      |_Preference, notify, lang, theme(**)
- |	 |	      |_Whishlist and saved items(**account)
- |	 |	      |_Payment methods, cards and hstry(**account)
- |	 |	      |_security and privacy(**help)
- |	 |	      |_support and feedback(FaQs, **help, issues)
- |	 |	      |_responsive, light, loading indicators
- |    |  | |  | | 
- |   |  	  |__**_Account(Add username, more contact info, country, change password, address and street, orders, )
- |   | 		  |__**Dashbord
- |   | 		  |__**_Categories
- |   | 		  |__**_Help(Contact Us)
- |	 |_Logo
- |	 |_Search|_autocomplete
- |	 |_profile
- |	 |_carts
+ 	 |_Toggle menu(account, Dashbord, help, Categories)
+      |_Logo
+      |_Search|_autocomplete
+      |_profile
+      |_carts
+      
+|_Account
+     |_Personal  Info
+     |_Orders(histry and mgt)
+     (Add username, more contact info, country, change password, address and street, orders, )
+     |_Whishlist and saved items(**account)
+     |_Payment methods, cards and hstry(**account)
+
+|__**Dashbord(relate from landing page)
+|__**_Categories
+|__**_Help(Contact Us)
+     |_Preference, notify, lang, theme(**)
+     |_security and privacy(**help)
+     |_support and feedback(FaQs, **help, issues)
+     |_responsive, light, loading indicators
+       	     
+
 Landig Page 
    |_categories
          |_Hero banner|_carousel

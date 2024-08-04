@@ -1,0 +1,29 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "E-commerce for accessories",
+  "main": "config.js",
+  "scripts": {
+    "start": "nodemon config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dansan-dsn/E-commerce.git"
+  },
+  "author": "d.s.n",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dansan-dsn/E-commerce/issues"
+  },
+  "homepage": "https://github.com/dansan-dsn/E-commerce#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.11.0",
+    "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
