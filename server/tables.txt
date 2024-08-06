@@ -65,4 +65,4 @@ cartItem tb|_id
 new-arrivals(target the product tb, for date)
 Top offers(target offers with high discount)
 Trending(target the order items... number of times)
-Highly rated(average rating targeting the reviews)
+Highly rated(average rating targeting the reviews) he
