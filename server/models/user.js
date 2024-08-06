@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../database/database");
+const bcrypt = require("bcryptjs");
 
 const User = sequelize.define(
   "User",
@@ -8,10 +9,6 @@ const User = sequelize.define(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-    },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
     },
     email: {
       type: DataTypes.STRING,
@@ -22,21 +19,56 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     role: {
       type: DataTypes.ENUM("admin", "user"),
       defaultValue: "user",
     },
-    phone: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     address: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+    },
+    otp: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    otpExpiration: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    otpRequests: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    lastOtpRequest: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    lastLogin: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    status: {
+      type: DataTypes.ENUM("active", "deactivated", "pending"),
+      defaultValue: "pending",
     },
   },
   {
     timestamps: true,
+    hooks: {
+      beforeSave: async (user) => {
+        if (user.changed("password")) {
+          user.password = await bcrypt.hash(user.password, 10);
+        }
+      },
+    },
   }
 );
 

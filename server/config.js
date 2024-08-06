@@ -18,7 +18,7 @@ sequelize
   .then(() => {
     console.log("Database connected successfully.");
 
-    app.listen(() => {
+    app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
   })
