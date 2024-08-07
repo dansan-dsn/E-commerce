@@ -134,7 +134,7 @@ router
         if (!isPasswordMatch)
           return res.status(200).json({ msg: "Password are not a match" });
 
-        user.lastLogin = new Date().now();
+        user.lastLogin = new Date().toISOString();
         await user.save();
 
         res.status(200).json({ msg: "User logged in successfully" });
@@ -283,6 +283,19 @@ router
       if (!user) return res.status(404).json({ error: "User not found" });
 
       res.status(200).json({ data: user });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  })
+
+  .delete("/nuked:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const user = await User.findByPk(id);
+      if (!user) return res.status(404).json({ error: "User not found" });
+
+      await user.destroy();
+      res.status(200).json({ msg: "User successfully deleted" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
