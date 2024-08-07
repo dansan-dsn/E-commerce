@@ -30,8 +30,6 @@ router
       user.otpExpiration = new Date(Date.now() + 10 * 60 * 1000);
       await user.save();
 
-      console.log(`Your OPT is ${otp}`);
-
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -52,13 +50,12 @@ router
 
       const sendMail = async (transporter, mailOption) => {
         await transporter.sendMail(mailOption);
-        res.status(200).json({ msg: "Verification message sent" });
+        res.status(200).json({
+          msg: "User successfully registered, Verification message sent",
+        });
+        console.log(`Your code: ${otp}`);
       };
       sendMail(transporter, mailOption);
-
-      res
-        .status(201)
-        .json({ msg: "User successfully registered, please verify your opt" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -147,8 +144,6 @@ router
         user.otpExpiration = new Date(Date.now() + 10 * 60 * 1000);
         await user.save();
 
-        console.log(`Your OPT is ${otp}`);
-
         const transporter = nodemailer.createTransport({
           service: "gmail",
           auth: {
@@ -169,16 +164,125 @@ router
 
         const sendMail = async (transporter, mailOption) => {
           await transporter.sendMail(mailOption);
-          res.status(200).json({ msg: "Verification message sent" });
+          res.status(200).json({
+            msg: "User successfull registered, Verification message sent",
+          });
+          console.log(`Your OPT is ${otp}`);
         };
         sendMail(transporter, mailOption);
-
-        res.status(201).json({
-          msg: "User successfully registered, please verify your opt",
-        });
       } else if (user.status === "deactivated") {
         res.status(204).json({ msg: "User needs to activate their account" });
       }
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  })
+
+  .put("/user_info", async (req, res) => {
+    const { email, username, phone, address } = req.body;
+    try {
+      const user = await User.findOne({ where: { email } });
+      if (!user) return res.status(404).json({ error: "User not found" });
+
+      if (!username || !phone || !address)
+        return res
+          .status(401)
+          .json({ error: "Username, phone and address required" });
+      await user.update({ email, username, phone, address });
+
+      res.status(200).json({ msg: "User info added successfully" });
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  })
+
+  .post("/deactivate", async (req, res) => {
+    const { password, email } = req.body;
+    if (!email || !password)
+      return res.status(401).json({ error: "Email and Password are required" });
+
+    try {
+      const user = await User.findOne({ where: { email } });
+      if (!user) return res.status(404).json({ error: "Email not found" });
+
+      const isPasswordMatch = await bcrypt.compare(password, user.password);
+      if (!isPasswordMatch)
+        return res.status(201).json({ error: "Password mismatches" });
+
+      user.status = "deactivated";
+      user.save();
+      res.status(200).json({ msg: "User successfully deactivated" });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  })
+
+  .post("/activate", async (req, res) => {
+    const { email } = req.body;
+    if (!email) {
+      res.status(401).json({ error: "Email is required" });
+    }
+
+    try {
+      const user = await User.findOne({ where: { email } });
+      if (!user) return res.status(404).json({ error: "User not found" });
+
+      const otp = generateOTP();
+      user.otp = otp;
+      user.otpExpiration = new Date(Date.now() + 10 * 60 * 1000);
+      await user.save();
+
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
+
+      const mailOption = {
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_USER,
+        subject: "User Verification",
+        html: `
+        <p>This is your account verification code</p>
+        <p>${otp}</p>
+        `,
+      };
+
+      const sendMail = async (transporter, mailOption) => {
+        await transporter.sendMail(mailOption);
+      };
+      sendMail(transporter, mailOption);
+
+      user.status = "pending";
+      await user.save();
+
+      console.log(`Your code: ${otp}`);
+      res.status(200).json({
+        msg: "User successfully registered, Verification message sent",
+      });
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  })
+
+  .get("/_all", async (reqs, res) => {
+    try {
+      const data = await User.findAll();
+      res.status(200).json({ data: data });
+    } catch (error) {
+      res.status(404).json({ error: error.message });
+    }
+  })
+
+  .get("/_one:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+      const user = await User.findByPk(id);
+      if (!user) return res.status(404).json({ error: "User not found" });
+
+      res.status(200).json({ data: user });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
