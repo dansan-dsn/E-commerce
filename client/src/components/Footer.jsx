@@ -14,7 +14,7 @@ const footer = () => {
             </h2>
             <div className="flex gap-1 md:gap-4">
               <Link
-                to="/dashboard"
+                to="/categories"
                 className=" px-1 md:px-4 py-1 text-xs md:text-lg bg-transparent rounded-full border cursor-pointer hover:bg-red-400 hover:border-none"
               >
                 Shop Target

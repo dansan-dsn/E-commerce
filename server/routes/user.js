@@ -107,7 +107,6 @@ router
       user.otp = otp;
       user.otpExpiration = new Date(Date.now() + 10 * 60 * 1000);
 
-      // if(user.otp === otp) {
       // Update request tracking
       user.otpRequests = (user.otpRequests || 0) + 1;
       user.lastOtpRequest = currentTime;

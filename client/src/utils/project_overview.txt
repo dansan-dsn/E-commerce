@@ -18,7 +18,7 @@ Home layout
      |_Personal  Info
      |_Orders(histry and mgt)
      (Add username, more contact info, country, change password, address and street, orders, )
-     |_Whishlist and saved items(**account)
+     |_Whishlist and saved items(**accounst)
      |_Payment methods, cards and hstry(**account)
 
 |__**Dashbord(relate from landing page)

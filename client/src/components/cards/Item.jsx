@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import img from "../../assets/images/flash1.png";
 import img2 from "../../assets/images/phone1.png";
 
-const Items = () => {
+const Item = () => {
   const [products, setProducts] = useState([
     {
       id: 1,
@@ -49,15 +48,6 @@ const Items = () => {
 
   return (
     <div>
-      <div className="flex justify-between py-2 px-10 bg-fuchsia-600 mt-1">
-        <p className="font-semibold">New Arrivals</p>
-        <Link
-          to="/categories"
-          className="font-semibold uppercase hover:text-gray-600"
-        >
-          See All
-        </Link>
-      </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-1">
         {products.map((product, index) => {
           return (
@@ -98,4 +88,4 @@ const Items = () => {
   );
 };
 
-export default Items;
+export default Item;
