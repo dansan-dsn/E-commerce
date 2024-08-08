@@ -38,7 +38,7 @@ const SearchBar = ({ value, onChange, onClearSearch }) => {
                   value={value}
                   onChange={onChange}
                   className="w-full relative  border-2 border-blue-300 pr-10 py-2 rounded outline-none text-gray-400"
-                  placeholder="Search.."
+                  placeholder="Search for products...."
                 />
                 {value && (
                   <IoIosCloseCircle
@@ -56,7 +56,7 @@ const SearchBar = ({ value, onChange, onClearSearch }) => {
           value={value}
           onChange={onChange}
           className="border-2 border-blue-300 py-2 rounded w-1/2 pl-8 pr-10 outline-none text-gray-400 hidden xs:block bg-slate-800"
-          placeholder="Search.."
+          placeholder="Search for products...."
         />
         {value && (
           <IoIosCloseCircle

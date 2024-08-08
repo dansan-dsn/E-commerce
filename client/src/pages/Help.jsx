@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { MdOutlineEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
+import { FaChevronUp } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 
 const Help = () => {
+  const [isOpen, setIsOpen] = useState("");
+  const [query, setQuery] = useState([
+    { id: 1, question: "Need to pay ", description: "hello there" },
+    { id: 2, question: "Need to pay ", description: "hello there" },
+  ]);
+  const handlePolicy = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       <Navbar />
@@ -50,6 +61,96 @@ const Help = () => {
               Send Message
             </button>
           </form>
+          <article className=" p-4 my-5">
+            <div className="flex justify-between bg-red-300 p-2 items-center">
+              <h2 className="hidden md:block relative text-green-800  font-extrabold text-xl border-l-4 border-l-red-500 pl-2">
+                Feedback.... Ask a question
+              </h2>
+              <label htmlFor="ask">
+                <input
+                  type="text"
+                  name="ask"
+                  id="ask"
+                  placeholder="Ask questions..."
+                  className="w-full rounded outline-none border-none"
+                />
+              </label>
+            </div>
+
+            {query.map((ask) => (
+              <article className="my-1" key={ask.id}>
+                <h3 className="text-green-500 text-lg font-sans font-bold bg-green-800 relative p-2">
+                  {ask.question}
+                  <span onClick={handlePolicy}>
+                    {isOpen ? (
+                      <FaChevronUp className="absolute top-3 right-4 text-black opacity-40 cursor-pointer" />
+                    ) : (
+                      <FaChevronDown className="absolute top-3 right-4 text-black opacity-40 cursor-pointer" />
+                    )}
+                  </span>
+                </h3>
+
+                {isOpen && (
+                  <div className="flex flex-col bg-green-300 p-3">
+                    <div>{ask.description}</div>
+                  </div>
+                )}
+              </article>
+            ))}
+          </article>
+
+          <article className="p-4 my-5">
+            <h2 className="relative text-green-800 p-2 bg-red-300 font-extrabold text-xl border-l-4 border-l-red-500 pl-2 text-center ">
+              Policy and Terms
+            </h2>
+            <div className="text-white p-2 border border-collapse border-dashed mx-2 flex flex-col md:flex-row justify-between gap-4">
+              <div className="flex flex-col border border-dotted p-3">
+                <h3 className="text-green-500 text-lg font-sans font-bold bg-green-800 p-2">
+                  Faqs
+                </h3>
+                <div>
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Optio totam debitis error temporibus, quos tenetur quia vero
+                  ducimus, aut repellendus dolorum voluptas sit placeat aliquam
+                  doloribus dicta explicabo magnam provident. Consectetur veniam
+                  ad rerum? Natus iste fuga ut, sapiente perspiciatis deserunt,
+                  similique vel architecto consequatur placeat maiores ad
+                  corrupti laudantium dolore esse ab possimus ea excepturi in
+                  ratione tenetur veniam.
+                </div>
+              </div>
+              <div className="flex flex-col border border-dotted p-3">
+                <h3 className="text-green-500 text-lg font-sans font-bold bg-green-800 p-2">
+                  Faqs
+                </h3>
+                <div>
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Optio totam debitis error temporibus, quos tenetur quia vero
+                  ducimus, aut repellendus dolorum voluptas sit placeat aliquam
+                  doloribus dicta explicabo magnam provident. Consectetur veniam
+                  ad rerum? Natus iste fuga ut, sapiente perspiciatis deserunt,
+                  similique vel architecto consequatur placeat maiores ad
+                  corrupti laudantium dolore esse ab possimus ea excepturi in
+                  ratione tenetur veniam.
+                </div>
+              </div>
+              <div className="flex flex-col border border-dotted p-3">
+                <h3 className="text-green-500 text-lg font-sans font-bold bg-green-800 p-2">
+                  Faqs
+                </h3>
+                <div>
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Optio totam debitis error temporibus, quos tenetur quia vero
+                  ducimus, aut repellendus dolorum voluptas sit placeat aliquam
+                  doloribus dicta explicabo magnam provident. Consectetur veniam
+                  ad rerum? Natus iste fuga ut, sapiente perspiciatis deserunt,
+                  similique vel architecto consequatur placeat maiores ad
+                  corrupti laudantium dolore esse ab possimus ea excepturi in
+                  ratione tenetur veniam.
+                </div>
+              </div>
+            </div>
+          </article>
         </div>
         <Footer />
       </div>
