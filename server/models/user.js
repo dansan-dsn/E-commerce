@@ -50,6 +50,7 @@ const User = sequelize.define(
     lastOtpRequest: {
       type: DataTypes.DATE,
       allowNull: true,
+      defaultValue: DataTypes.NOW,
     },
     lastLogin: {
       type: DataTypes.DATE,
@@ -58,6 +59,10 @@ const User = sequelize.define(
     status: {
       type: DataTypes.ENUM("active", "deactivated", "pending"),
       defaultValue: "pending",
+    },
+    isVerified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   },
   {
