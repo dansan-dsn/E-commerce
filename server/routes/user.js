@@ -373,6 +373,69 @@ router
     } catch (error) {
       res.status(500).json({ error: error });
     }
+  })
+
+  .put("/changePassword:id", async (req, res) => {
+    const { password, newPassword } = req.body;
+    const { id } = req.params;
+
+    if (!password || !newPassword)
+      return res.status(401).json({ error: "Fields required" });
+
+    const user = await User.findByPk(id);
+    if (!user) return res.status(404).json({ msg: "User not found" });
+
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    if (!isPasswordMatch)
+      return res.status(402).json({ msg: "Password mismatch" });
+
+    user.password = newPassword;
+    await user.save();
+
+    res.status(200).json({ msg: "Password changed successfully" });
+  })
+
+  .put("/change_email:id", async (req, res) => {
+    const { newEmail } = req.query;
+    const { id } = req.params;
+    if (!newEmail) return res.status(400).json({ msg: "Fields required" });
+    try {
+      const user = await User.findByPk(id);
+      if (!user) return res.status(404).json({ error: "user not found" });
+
+      if (user.email === newEmail)
+        return res
+          .status(200)
+          .json({ msg: "This is the current email, use a different one" });
+
+      user.email = newEmail;
+      await user.save();
+
+      res.status(200).json({ msg: "Email updated successfully" });
+    } catch (error) {
+      res.status(404).json({ error: error.message });
+    }
+  })
+
+  .put("/change_username:id", async (req, res) => {
+    const { username } = req.body;
+    if (!username)
+      return res.status(400).json({ error: "username is required" });
+
+    try {
+      const user = await User.findByPk(req.params.id);
+      if (!user) return res.status(404).json({ error: "User not found" });
+
+      if (user.username === username)
+        return res.status(200).json({ error: "NEEDS a new username" });
+
+      user.username = username;
+      await user.save();
+
+      res.status(200).json({ msg: "Username updated successfully" });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
   });
 
 module.exports = router;
