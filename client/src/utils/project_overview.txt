@@ -41,3 +41,27 @@ Landig Page
 	     |_Top Offers
           |_Reviews
           |_footer
+
+|_basic tech accessories
+                       |_phone accessories|_Phone cases(protective, wallet, bumper, customizable)
+                                          |_Screen Protectors(Tempered, platic, privacy)
+                                          |_Chargers and cables(wall, car, wirelees, chargin docks, data cables)
+                                          |_headphone and earbuds(over_ear, one_ear, in_ear, true_wireless, noise_cacelling)
+                                          |_smartwatch bands(sport, leather, metal, nylon)
+
+                        |_laptop accessories|_Sleeves and bags(Sleeves, bags, backpacks)
+                                            |_Stands(adjustable, portable, cooling)
+                                            |_docking station(usb-c, thunderbolt, universal)
+                                            |_external storage(external hdd, ssd, usb flash drive)
+                         
+                        |_gaming accessories|_gaming headsets(surround sound, microphone, comfort features)
+                                            |_Keyboards and mice(mechanical, gaming mice, mouse pad) 
+                                            |_monitors(high refresh rate, 4K, curved)
+
+                        |_Home office accessories|_webcams(HD, 4K)
+                                                 |_microphones(usb, xls)
+                                                 |_speakers(bluetooth, desktop)  
+
+                        |_powerbanks and battery packs(portable, high capacity, solar)
+                        |_Miscellaneous|_cable organisers(cable organisers, cable protectors)
+                                       |_screen cleaning kits(microfibre cloths, cleaning sprays)            
