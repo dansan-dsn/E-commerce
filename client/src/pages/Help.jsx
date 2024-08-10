@@ -6,14 +6,17 @@ import { FaUser } from "react-icons/fa";
 import { FaChevronUp } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 
+const queryItems = [
+  { id: 1, question: "Need to pay ", description: "hello there" },
+  { id: 2, question: "Need to pay ", description: "hello there" },
+];
+
 const Help = () => {
-  const [isOpen, setIsOpen] = useState("");
-  const [query, setQuery] = useState([
-    { id: 1, question: "Need to pay ", description: "hello there" },
-    { id: 2, question: "Need to pay ", description: "hello there" },
-  ]);
-  const handlePolicy = () => {
-    setIsOpen(!isOpen);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const handlePolicy = (item, e) => {
+    e.preventDefault();
+    setSelectedItem(item);
+    console.log(item);
   };
 
   return (
@@ -21,10 +24,10 @@ const Help = () => {
       <Navbar />
       <div className="flex-grow overflow-y-auto">
         <div className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-10 font-sans">
-          <h2 className="text-white capitalize text-3xl font-semibold my-3">
+          <h2 className="text-white text-center md:text-left capitalize text-3xl font-semibold my-3">
             contact us
           </h2>
-          <form className="flex flex-col gap-10">
+          <form className="flex flex-col gap-10 md:items-start items-center">
             <label htmlFor="name" className="relative">
               <FaUser className="absolute top-3 left-2 opacity-60" />
               <input
@@ -77,12 +80,12 @@ const Help = () => {
               </label>
             </div>
 
-            {query.map((ask) => (
+            {queryItems.map((ask) => (
               <article className="my-1" key={ask.id}>
                 <h3 className="text-green-500 text-lg font-sans font-bold bg-green-800 relative p-2">
                   {ask.question}
-                  <span onClick={handlePolicy}>
-                    {isOpen ? (
+                  <span onClick={(e) => handlePolicy(ask, e)}>
+                    {ask === selectedItem ? (
                       <FaChevronUp className="absolute top-3 right-4 text-black opacity-40 cursor-pointer" />
                     ) : (
                       <FaChevronDown className="absolute top-3 right-4 text-black opacity-40 cursor-pointer" />
@@ -90,8 +93,8 @@ const Help = () => {
                   </span>
                 </h3>
 
-                {isOpen && (
-                  <div className="flex flex-col bg-green-300 p-3">
+                {ask === selectedItem && (
+                  <div className="flex flex-col bg-green-200 p-3">
                     <div>{ask.description}</div>
                   </div>
                 )}
