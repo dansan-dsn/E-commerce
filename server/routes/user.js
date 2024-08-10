@@ -9,6 +9,32 @@ const generateOTP = () => {
   return crypto.randomInt(100000, 999999).toString();
 };
 
+const sendVerificationEmail = (otp, subject, content) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
+  const mailOption = {
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_USER,
+    subject: `${subject}`,
+    html: `
+        <p>This is your ${content} code</p>
+        <p>${otp}</p>
+        `,
+  };
+
+  const sendMail = async (transporter, mailOption) => {
+    await transporter.sendMail(mailOption);
+    console.log(`Your code: ${otp}`);
+  };
+  sendMail(transporter, mailOption);
+};
+
 router
   .post("/register", async (req, res) => {
     const { email, password } = req.body;
@@ -30,32 +56,8 @@ router
       user.otpExpiration = new Date(Date.now() + 10 * 60 * 1000);
       await user.save();
 
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS,
-        },
-      });
-
-      const mailOption = {
-        from: process.env.EMAIL_USER,
-        to: process.env.EMAIL_USER,
-        subject: "User Verification",
-        html: `
-        <p>This is your account verification code</p>
-        <p>${otp}</p>
-        `,
-      };
-
-      const sendMail = async (transporter, mailOption) => {
-        await transporter.sendMail(mailOption);
-        res.status(200).json({
-          msg: "User successfully registered, Verification message sent",
-        });
-        console.log(`Your code: ${otp}`);
-      };
-      sendMail(transporter, mailOption);
+      sendVerificationEmail(otp, "Verify your email", "registration");
+      res.status(201).json({ msg: "User registered successfully, code sent" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -150,32 +152,10 @@ router
         user.otpExpiration = new Date(Date.now() + 10 * 60 * 1000);
         await user.save();
 
-        const transporter = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
-          },
-        });
-
-        const mailOption = {
-          from: process.env.EMAIL_USER,
-          to: process.env.EMAIL_USER,
-          subject: "User Verification",
-          html: `
-          <p>This is your account verification code</p>
-          <p>${otp}</p>
-          `,
-        };
-
-        const sendMail = async (transporter, mailOption) => {
-          await transporter.sendMail(mailOption);
-          res.status(200).json({
-            msg: "User successfull registered, Verification message sent",
-          });
-          console.log(`Your OPT is ${otp}`);
-        };
-        sendMail(transporter, mailOption);
+        sendVerificationEmail(otp, "Verify your email", "registration");
+        res
+          .status(201)
+          .json({ msg: "User registered successfully, code sent" });
       } else if (user.status === "deactivated") {
         res.status(401).json({ msg: "User needs to activate their account" });
       }
@@ -238,33 +218,15 @@ router
       user.otpExpiration = new Date(Date.now() + 10 * 60 * 1000);
       await user.save();
 
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS,
-        },
-      });
-
-      const mailOption = {
-        from: process.env.EMAIL_USER,
-        to: process.env.EMAIL_USER,
-        subject: "User Verification",
-        html: `
-        <p>This is your account verification code</p>
-        <p>${otp}</p>
-        `,
-      };
-
-      const sendMail = async (transporter, mailOption) => {
-        await transporter.sendMail(mailOption);
-      };
-      sendMail(transporter, mailOption);
+      sendVerificationEmail(
+        otp,
+        "Account Activation Code",
+        "account activation"
+      );
 
       user.status = "pending";
       await user.save();
 
-      console.log(`Your code: ${otp}`);
       res.status(200).json({
         msg: "User successfully registered, Verification message sent",
       });
@@ -319,28 +281,7 @@ router
       user.otpExpiration = new Date(Date.now() + 10 * 60 * 1000);
       await user.save();
 
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS,
-        },
-      });
-
-      const mailOption = {
-        from: process.env.EMAIL_USER,
-        to: process.env.EMAIL_USER,
-        subject: "Reset Password",
-        html: `
-        <p>This is your password reset code</p>
-        <p>${otp}</p>
-        `,
-      };
-
-      const sendMail = async (transporter, mailOption) => {
-        await transporter.sendMail(mailOption);
-      };
-      sendMail(transporter, mailOption);
+      sendVerificationEmail(otp, "Reset Password", "reset password");
 
       user.isVerified = true;
       await user.save();
@@ -399,17 +340,24 @@ router
     const { newEmail } = req.query;
     const { id } = req.params;
     if (!newEmail) return res.status(400).json({ msg: "Fields required" });
+
     try {
       const user = await User.findByPk(id);
       if (!user) return res.status(404).json({ error: "user not found" });
 
-      if (user.email === newEmail)
-        return res
-          .status(200)
-          .json({ msg: "This is the current email, use a different one" });
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(newEmail))
+        return res.status(400).json({ error: "Invalid email format" });
 
       user.email = newEmail;
       await user.save();
+
+      const otp = generateOTP();
+      user.otp = otp;
+      user.otpExpiration = new Date(Date.now() + 10 * 60 * 1000);
+      await user.save();
+
+      sendVerificationEmail(otp, "Reset Password", "reset password");
 
       res.status(200).json({ msg: "Email updated successfully" });
     } catch (error) {
@@ -426,13 +374,46 @@ router
       const user = await User.findByPk(req.params.id);
       if (!user) return res.status(404).json({ error: "User not found" });
 
-      if (user.username === username)
-        return res.status(200).json({ error: "NEEDS a new username" });
-
       user.username = username;
       await user.save();
 
       res.status(200).json({ msg: "Username updated successfully" });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  })
+
+  .put("/change_phone:id", async (req, res) => {
+    const { phone } = req.body;
+    if (!phone)
+      return res.status(400).json({ error: "Please enter a phone number" });
+
+    try {
+      const user = await User.findByPk(req.params.id);
+      if (!user) return res.status(404).json({ error: "User not found" });
+
+      user.phone = phone;
+      await user.save();
+
+      res.status(200).json({ msg: "Phone number updated successfully" });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  })
+
+  .put("/change_address:id", async (req, res) => {
+    const { address } = req.body;
+    if (!address)
+      return res.status(400).json({ error: "Please enter an address" });
+
+    try {
+      const user = await User.findByPk(req.params.id);
+      if (!user) return res.status(404).json({ error: "User not found" });
+
+      user.address = address;
+      await user.save();
+
+      res.status(200).json({ msg: "Address updated successfully" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
