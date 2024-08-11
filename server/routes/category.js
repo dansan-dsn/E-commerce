@@ -29,6 +29,14 @@ router
       if (!name || !description)
         return res.status(400).json({ error: "Fields must be filled" });
 
+      const category = await Category.findByPk(id);
+      if (!category)
+        return res.status(404).json({ error: "Category not found" });
+
+      const categories = await Category.findOne({ where: { name } });
+      if (categories)
+        return res.status(200).json({ error: "Category already exists" });
+
       const [numberOfAffectedRows] = await Category.update(
         { name, description },
         { where: { id } }
@@ -37,7 +45,7 @@ router
       if (numberOfAffectedRows > 0)
         return res.status(200).json({ msg: "Categories updated successfully" });
 
-      res.status(404).json({ error: "Category not found or no changes made" });
+      res.status(404).json({ error: "No changes where made" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -47,6 +55,35 @@ router
     try {
       const categories = await Category.findAll();
       res.status(200).json({ data: categories });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  })
+
+  .get("/_1category:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const category = await Category.findByPk(id);
+      if (!category)
+        return res.status(404).json({ error: "Category not found" });
+
+      res.status(200).json({ data: category });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  })
+
+  .delete("/remove:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const category = await Category.findByPk(id);
+      if (!category)
+        return res.status(404).json({ error: "Category not found" });
+
+      await category.destroy();
+      return res.status(200).json({ msg: "Category removed successfully" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
