@@ -90,7 +90,7 @@ const Cart = () => {
         }`}
       >
         <div
-          className={`bg-gray-500 shadow-2xl m-3 w-5/6 md:w-1/3 h-[600px] right-0 absolute top-1 rounded-sm transition-transform duration-300 ease-in-out transform ${
+          className={`bg-gray-500 shadow-2xl m-3 w-5/6 md:w-1/3 h-[600px] right-0 absolute top-1 rounded-sm transition-all duration-300 ease-in-out transform ${
             isCartOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
