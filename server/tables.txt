@@ -4,7 +4,8 @@ uset tb|_id
        |_email
        |_address
        |_phoneNumber
-       |_role(customer, customer)
+       |_discount
+       |_role(user, admin)
 
 Products tb|_id
            |_name
