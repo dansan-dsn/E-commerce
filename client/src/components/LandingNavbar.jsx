@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import ProfileInfo from "./ProfileInfo";
 import Date from "./cards/CurrentDate";
@@ -10,6 +10,7 @@ import { Im500Px } from "react-icons/im";
 const LandingNavbar = () => {
   const [querySearch, setQuerySearch] = useState("");
   const [isMenu, setIsMenu] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setQuerySearch(e.target.value);
@@ -23,6 +24,10 @@ const LandingNavbar = () => {
     setIsMenu(!isMenu);
   };
 
+  const hanldeCheck = () => {
+    navigate("/login");
+  };
+
   return (
     <div className="sticky top-0 left-0 w-full bg-gray-900 z-50 py-3 px-1 shadow-gray-400 shadow">
       <div className="container mx-auto flex flex-col xs:justify-between items-center relative">
@@ -33,7 +38,7 @@ const LandingNavbar = () => {
             onClick={handleMenu}
           />
 
-          <Link to="/dashboard" className=" font-bold ">
+          <Link to="/" className=" font-bold ">
             <Im500Px className="size-10 -rotate-45 shadow-xl shadow-gray-500 p-1 cursor-pointer" />
             <span className="text-white">d.s.n</span>
           </Link>
@@ -46,8 +51,21 @@ const LandingNavbar = () => {
               />
             </div>
           </div>
-          <ProfileInfo />
-          <Cart />
+          <div className="gap-2 text-white opacity-50">
+            <Link
+              to="/login"
+              className="hover:underline hover:text-blue-500 m-2"
+            >
+              SignIn
+            </Link>
+            <Link
+              to="/register"
+              className="hover:underline hover:text-blue-500 m-2"
+            >
+              SignUp
+            </Link>
+          </div>
+          <Cart checkout={hanldeCheck} />
         </div>
         <div
           className={`w-full bg-gray-900 transition-all duration-300 ease-in-out overflow-hidden ${

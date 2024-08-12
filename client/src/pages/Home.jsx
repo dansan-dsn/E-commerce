@@ -12,7 +12,7 @@ const Home = () => {
     <div className="flex flex-col h-screen overflow-hidden">
       <Navbar />
       <div className="flex-grow overflow-y-auto">
-        <div className="bg-blue-300">
+        <div className="bg-blue-400">
           <div className="text-center bg-fuchsia-600 mt-1">
             <h1 className="p-3 text-center uppercase font-bold">
               products on Discount

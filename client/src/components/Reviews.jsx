@@ -29,8 +29,8 @@ const Reviews = () => {
 
   return (
     <div className="m-0">
-      <div className="p-3">
-        <h1 className="text-center text-2xl font-bold my-1 text-gray-800 uppercase">
+      <div className="">
+        <h1 className="text-center text-2xl font-bold my-1 text-white uppercase">
           Testimonials
         </h1>
         <div className="relative flex overflow-hidden py-10 bg-slate-400 rounded">

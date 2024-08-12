@@ -5,7 +5,7 @@ import { IoClose } from "react-icons/io5";
 import Counter from "./Counter";
 import img from "../../assets/images/shopping cart.jpeg";
 
-const Cart = () => {
+const Cart = ({ checkout }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [items, setItems] = useState([
     {
@@ -144,6 +144,7 @@ const Cart = () => {
               <div
                 type="submit"
                 className="mx-2 p-3 my-5 text-center bg-blue-900 rounded text-white font-bold cursor-pointer hover:bg-blue-700"
+                onClick={checkout}
               >
                 CheckOut
               </div>
