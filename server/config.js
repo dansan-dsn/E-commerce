@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3003;
 const sequelize = require("./database/database");
 const User = require("./routes/user");
 const Category = require("./routes/category");
+const Product = require("./routes/product");
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(cors());
 
 app.use("/user", User);
 app.use("/category", Category);
+app.use("/product", Product);
 
 sequelize
   .sync({ force: false })

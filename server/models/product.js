@@ -1,5 +1,5 @@
-const { DataTypes, Model } = require("sequelize");
-const sequelize = require("./database/database");
+const { DataTypes } = require("sequelize");
+const sequelize = require("../database/database");
 const Category = require("./category");
 
 const Product = sequelize.define("Product", {
@@ -33,6 +33,7 @@ const Product = sequelize.define("Product", {
   },
   stockQuantity: {
     type: DataTypes.INTEGER,
+    defaultValue: 0,
     allowNull: false,
   },
   discount: {
@@ -41,6 +42,7 @@ const Product = sequelize.define("Product", {
   },
 });
 
-Product.belongsTo(Category);
+Product.belongsTo(Category, { foreignKey: "categoryId" });
+Category.hasMany(Product, { foreignKey: "categoryId" });
 
 module.exports = Product;
