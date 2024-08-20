@@ -22,7 +22,7 @@ Categories tb|_categoryId
 
 Order tb|_OderId
         |_userId(foreign id of user)
-        |_productID(foreign id of product)
+        |_cart(foreign id of cart)
         |_quatity of product ordered
         |_price
 

@@ -6,6 +6,7 @@ const sequelize = require("./database/database");
 const User = require("./routes/user");
 const Category = require("./routes/category");
 const Product = require("./routes/product");
+const Cart = require("./routes/cart");
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(cors());
 app.use("/user", User);
 app.use("/category", Category);
 app.use("/product", Product);
+app.use("/cart", Cart);
 
 sequelize
   .sync({ force: false })
