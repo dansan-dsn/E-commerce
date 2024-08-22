@@ -57,7 +57,7 @@ router
       if (!cart) return res.status(404).json({ error: "cart not found" });
 
       await cart.destroy();
-      res.status(200).json({ msg: "Cart deleted successfully" });
+      res.status(200).json({ msg: "Cart is deleted successfully" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
