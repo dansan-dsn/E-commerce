@@ -17,6 +17,10 @@ const Cart = sequelize.define(
         key: "id",
       },
     },
+    totalAmount: {
+      type: DataTypes.FLOAT,
+      defaultValue: 0,
+    },
   },
   {
     timestamps: true,
@@ -24,6 +28,6 @@ const Cart = sequelize.define(
 );
 
 Cart.belongsTo(User, { foreignKey: "userId" });
-User.hasMany(Cart, { foreignKey: "userId" });
+User.hasOne(Cart, { foreignKey: "userId" });
 
 module.exports = Cart;

@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("./database/database");
+const sequelize = require("../database/database");
 const Cart = require("../models/cart");
 const Product = require("../models/product");
 
@@ -27,9 +27,16 @@ const CartItems = sequelize.define("CartItems", {
     type: DataTypes.INTEGER,
     defaultValue: 0,
   },
+  price: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
 });
 
 CartItems.belongsTo(Cart, { foreignKey: "cartId" });
 Cart.hasMany(CartItems, { foreignKey: "cartId" });
+
+Product.hasMany(CartItems, { foreignKey: "productId" });
+CartItems.belongsTo(Product, { foreignKey: "productId" });
 
 module.exports = CartItems;
