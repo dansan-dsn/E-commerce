@@ -51,7 +51,7 @@ router
   .delete("/delete_cart:id", async (req, res) => {
     try {
       const { id } = req.params;
-      if (!id) return res.status(400).json({ error: "Cart id is required" });
+      if (!id) return res.status(400).json({ error: "Cart id must be provided" });
 
       const cart = await Cart.findByPk(id);
       if (!cart) return res.status(404).json({ error: "cart not found" });
