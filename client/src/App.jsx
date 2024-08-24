@@ -12,6 +12,7 @@ import Orders from "./pages/Orders";
 import Categories from "./pages/Categories";
 import Account from "./pages/Account";
 import Help from "./pages/Help";
+import UserInfo from "./pages/user_info";
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -47,6 +48,7 @@ const App = () => {
             <Route path="/categories" element={<Categories />} />
             <Route path="/account" element={<Account />} />
             <Route path="/contact-us" element={<Help />} />
+            <Route path="/user-info" element={<UserInfo />} />
           </Routes>
         )}
       </BrowserRouter>
