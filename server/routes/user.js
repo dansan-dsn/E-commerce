@@ -179,7 +179,7 @@ router
 
       res.status(200).json({ msg: "User info added successfully" });
     } catch (error) {
-      res.status(500).json({ error: error });
+      res.status(500).json({ error: error.message });
     }
   })
 
