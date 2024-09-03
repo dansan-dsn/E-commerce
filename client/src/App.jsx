@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
-import VerifyPassword from "./pages/VerifyPassword";
+import OtpVerification from "./pages/OtpVerification";
 import Orders from "./pages/Orders";
 import Categories from "./pages/Categories";
 import Account from "./pages/Account";
@@ -40,10 +40,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot_password" element={<ForgotPassword />} />
-            <Route
-              path="/forgot_password/verify"
-              element={<VerifyPassword />}
-            />
+            <Route path="/verify" element={<OtpVerification />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/account" element={<Account />} />

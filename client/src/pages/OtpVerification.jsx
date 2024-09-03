@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import backgroundImg from "../assets/images/lock.jpg";
 import useImage from "../assets/images/shopping cart.jpeg";
+import axios from "axios";
 
-const VerifyPassword = () => {
+const OtpVerification = () => {
   const [code, setCode] = useState(["", "", "", "", ""]);
   const [message, setMessage] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("userEmail");
+    console.log("Retrieved email from localStorage:", storedEmail);
+    if (storedEmail) {
+      setEmail(storedEmail);
+    } else {
+      setMessage("Email not found. Please register or log in first.");
+    }
+  }, []);
 
   const handleChange = (e, index) => {
     const newCode = [...code];
@@ -14,14 +26,28 @@ const VerifyPassword = () => {
     setCode(newCode);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const otp = code.join("");
-    setMessage(`Entered OTP: ${otp}`);
-    if (otp === "12345") {
-      navigate("/dashboard");
-    } else {
-      setMessage("Invalid OTP. Please try again.");
+
+    try {
+      const response = await axios.post("http://localhost:3003/user/verify", {
+        email,
+        otp,
+      });
+      if (response.status === 200) {
+        navigate("/user-info");
+      } else if (response.status === 204) {
+        setMessage("OTP is required");
+      }
+    } catch (err) {
+      if (err.response.status === 400) {
+        setMessage("Invalid OTP. Request a new one.");
+      } else if (err.response.status === 404) {
+        setMessage("Email not found. Please register or log in first.");
+      } else {
+        setMessage("Verification failed. Please try again.");
+      }
     }
   };
 
@@ -39,10 +65,14 @@ const VerifyPassword = () => {
         }}
       >
         <div className="">
-          <h2 className="text-2xl font-extrabold">Reset Password</h2>
+          <h2 className="text-2xl font-extrabold capitalize">
+            Account Verification
+          </h2>
           <form className="flex flex-col" onSubmit={handleSubmit}>
             <p className="text-center mt-4">
-              Please enter the code we sent to your email
+              {email
+                ? `Please enter the code we sent to ${email}`
+                : "Email not found. Please register or log in first."}
             </p>
             <span className="mt-5 font-bold">Code</span>
             <div className="ml-6 flex">
@@ -61,6 +91,7 @@ const VerifyPassword = () => {
             <button
               type="submit"
               className="w-full mt-10 p-2 rounded bg-amber-700 hover:bg-amber-600 text-white"
+              disabled={!email}
             >
               Reset Password
             </button>
@@ -76,4 +107,4 @@ const VerifyPassword = () => {
   );
 };
 
-export default VerifyPassword;
+export default OtpVerification;

@@ -1,30 +1,51 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineEmail } from "react-icons/md";
 import Password from "../components/Password";
 import backgroundImg from "../assets/images/shop.jpg";
 import useImage from "../assets/images/shopping cart.jpeg";
 import { validatePassword, validateEmail } from "../utils/validator";
+import axios from "axios";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleRegistration = (e) => {
+  const handleRegistration = async (e) => {
     e.preventDefault();
-    if (!validateEmail(email)) {
-      setError("Please enter a valid email address");
-      return;
-    }
-    if (!validatePassword(password)) {
-      setError(`Please enter a valid password`);
-      return;
-    }
-    setEmail("");
-    setPassword("");
     setError("");
+    try {
+      if (!validateEmail(email)) {
+        setError("Please enter a valid email address");
+        return;
+      }
+      // if (!validatePassword(password)) {
+      //   setError(`Please enter a valid password`);
+      //   return;
+      // }
+
+      if (!password) return setError("Please enter a password");
+
+      const response = await axios.post("http://localhost:3003/user/register", {
+        email,
+        password,
+      });
+      setEmail("");
+      setPassword("");
+      setError("");
+      if (response.status === 201) {
+        localStorage.setItem("userEmail", response.data.email);
+        navigate("/verify");
+      }
+    } catch (err) {
+      if (err.response.status === 409) {
+        setError("Email already registered, you can login");
+      }
+      console.log(err);
+    }
   };
 
   return (
@@ -72,7 +93,7 @@ const Register = () => {
             <label htmlFor="email" className="mb-5 relative flex text-gray-400">
               <MdOutlineEmail className="absolute left-1 top-2 size-6" />
               <input
-                type="email"
+                type="text"
                 value={email}
                 id="email"
                 name="email"

@@ -6,7 +6,7 @@ const crypto = require("crypto");
 const User = require("../models/user");
 
 const generateOTP = () => {
-  return crypto.randomInt(100000, 999999).toString();
+  return crypto.randomInt(10000, 99999).toString();
 };
 
 const sendVerificationEmail = (otp, subject, content) => {
@@ -47,7 +47,7 @@ router
     try {
       const existingEmail = await User.findOne({ where: { email } });
       if (existingEmail)
-        return res.status(400).json({ msg: "Email already exists" });
+        return res.status(409).json({ msg: "Email already exists" });
 
       const user = await User.create({ email, password });
 
@@ -57,7 +57,7 @@ router
       await user.save();
 
       sendVerificationEmail(otp, "Verify your email", "registration");
-      res.status(201).json({ msg: "User registered successfully, code sent" });
+      res.status(201).json({ email: user.email });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -66,6 +66,7 @@ router
   .post("/verify", async (req, res) => {
     try {
       const { email, otp } = req.body;
+      if (!otp) return res.status(204).json({ error: "Otp is needed" });
 
       const user = await User.findOne({ where: { email } });
       if (!user) return res.status(404).json({ message: "User not found" });

@@ -1,12 +1,24 @@
-import react from "react";
+import react, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const UserInfo = () => {
+  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [error, setError] = useState("");
+  useEffect(() => {
+    const userEmail = localStorage.getItem("userEmail");
+    setEmail(userEmail);
+  });
   return (
     <>
       <div className="flex items-center justify-center h-screen">
         <form className="p-10 flex flex-col shadow-2xl m-4">
           <h2 className="text-amber-600 font-bold text-xl text-center py-3 capitalize">
-            Please provide your info
+            Please provide your info for{" "}
+            <span className="lowercase text-green-500">{email}</span>
           </h2>
           <label
             htmlFor="username"
