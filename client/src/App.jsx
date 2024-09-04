@@ -13,6 +13,7 @@ import Categories from "./pages/Categories";
 import Account from "./pages/Account";
 import Help from "./pages/Help";
 import UserInfo from "./pages/user_info";
+import ActivateAccount from "./pages/ActivateAccount";
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -46,6 +47,7 @@ const App = () => {
             <Route path="/account" element={<Account />} />
             <Route path="/contact-us" element={<Help />} />
             <Route path="/user-info" element={<UserInfo />} />
+            <Route path="/activate-account" element={<ActivateAccount />} />
           </Routes>
         )}
       </BrowserRouter>

@@ -66,13 +66,13 @@ router
   .post("/verify", async (req, res) => {
     try {
       const { email, otp } = req.body;
-      if (!otp) return res.status(204).json({ error: "Otp is needed" });
+      if (!otp) return res.status(400).json({ error: "Otp is needed" });
 
       const user = await User.findOne({ where: { email } });
       if (!user) return res.status(404).json({ message: "User not found" });
 
       if (otp !== user.otp || user.otpExpiration < new Date())
-        return res.status(400).json({ error: "Invalid or expired user" });
+        return res.status(401).json({ error: "Invalid or expired user" });
 
       user.isVerified = true;
       user.save();
@@ -127,20 +127,16 @@ router
   .post("/login", async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password)
-      return res.status(401).json({ error: "Email and password are required" });
+      return res.status(400).json({ error: "Email and password are required" });
     try {
       const user = await User.findOne({ where: { email } });
       if (!user) return res.status(404).json({ error: "User not found" });
 
-      isPasswordMatch = bcrypt.compare(password, user.password);
+      let isPasswordMatch = await bcrypt.compare(password, user.password);
       if (!isPasswordMatch)
         return res.status(401).json({ error: "Password mismatch" });
 
       if (user.isVerified == true || user.status == "active") {
-        let isPasswordMatch = await bcrypt.compare(password, user.password);
-        if (!isPasswordMatch)
-          return res.status(200).json({ msg: "Password are not a match" });
-
         user.lastLogin = new Date().toISOString();
         user.isVerified = false;
         user.status = "active";
@@ -154,11 +150,9 @@ router
         await user.save();
 
         sendVerificationEmail(otp, "Verify your email", "registration");
-        res
-          .status(201)
-          .json({ msg: "User registered successfully, code sent" });
+        res.status(201).json({ email: user.email });
       } else if (user.status === "deactivated") {
-        res.status(401).json({ msg: "User needs to activate their account" });
+        res.status(410).json({ msg: "User needs to activate their account" });
       }
     } catch (error) {
       res.status(500).json({ error: error.message });

@@ -37,16 +37,25 @@ const OtpVerification = () => {
       });
       if (response.status === 200) {
         navigate("/user-info");
-      } else if (response.status === 204) {
-        setMessage("OTP is required");
       }
     } catch (err) {
-      if (err.response.status === 400) {
-        setMessage("Invalid OTP. Request a new one.");
-      } else if (err.response.status === 404) {
-        setMessage("Email not found. Please register or log in first.");
+      if (err.response) {
+        switch (err.response.status) {
+          case 400:
+            return setMessage("OTP is required");
+          case 401:
+            return setMessage("Invalid OTP. Request a new one.");
+          case 404:
+            return setMessage(
+              "Email not found. Please register or log in first."
+            );
+          default:
+            return setMessage("Verification failed. Please try again.");
+        }
+      } else if (err.request) {
+        setMessage("Please check your connecton");
       } else {
-        setMessage("Verification failed. Please try again.");
+        setMessage("Error setting up request " + err.message);
       }
     }
   };
