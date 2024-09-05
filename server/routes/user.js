@@ -87,7 +87,7 @@ router
   .post("/new-otp", async (req, res) => {
     const { email } = req.body;
     if (!email)
-      return res.status(404).json({ error: "Email must be provided" });
+      return res.status(400).json({ error: "Email must be provided" });
     try {
       const user = await User.findOne({ where: { email } });
 
@@ -120,7 +120,10 @@ router
 
       console.log(`Your new OTP is ${otp}`);
 
-      res.status(200).json({ msg: "New OTP generated and sent successfully" });
+      res.status(200).json({
+        msg: "New OTP generated and sent successfully",
+        email: user.email,
+      });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -285,12 +288,10 @@ router
 
       sendVerificationEmail(otp, "Reset Password", "reset password");
 
-      res
-        .status(200)
-        .json({
-          msg: "Password reset verificaion code sent, ",
-          email: user.email,
-        });
+      res.status(200).json({
+        msg: "Password reset verificaion code sent, ",
+        email: user.email,
+      });
       console.log(`${otp}`);
     } catch (error) {
       res.status(500).json({ error: error.message });
