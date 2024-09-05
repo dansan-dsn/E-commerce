@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import backgroundImg from "../assets/images/lock.jpg";
 import useImage from "../assets/images/shopping cart.jpeg";
 import axios from "axios";
@@ -9,6 +9,7 @@ const OtpVerification = () => {
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const storedEmail = localStorage.getItem("userEmail");
@@ -19,6 +20,17 @@ const OtpVerification = () => {
       setMessage("Email not found. Please register or log in first.");
     }
   }, []);
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("userEmail");
+    if (location.pathname.startsWith("/forgot_password")) {
+      if (storedEmail) {
+        navigate(`/reset_password?email=${encodeURIComponent(storedEmail)}`);
+      } else {
+        setMessage("Email not found. Please register or log in first.");
+      }
+    }
+  }, [location, navigate]);
 
   const handleChange = (e, index) => {
     const newCode = [...code];
@@ -36,7 +48,11 @@ const OtpVerification = () => {
         otp,
       });
       if (response.status === 200) {
-        navigate("/user-info");
+        if (!response.data.username) {
+          navigate("/user-info");
+        } else {
+          navigate("/login");
+        }
       }
     } catch (err) {
       if (err.response) {

@@ -76,7 +76,9 @@ router
 
       user.isVerified = true;
       user.save();
-      res.status(200).json({ msg: "User is Verified" });
+      res
+        .status(200)
+        .json({ msg: "User is Verified", username: user.username });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -142,7 +144,9 @@ router
         user.status = "active";
         await user.save();
 
-        res.status(200).json({ msg: "User logged in successfully" });
+        res
+          .status(200)
+          .json({ msg: "User logged in successfully", userId: user.id });
       } else if (user.status === "pending") {
         const otp = generateOTP();
         user.otp = otp;
@@ -208,6 +212,8 @@ router
       const user = await User.findOne({ where: { email } });
       if (!user) return res.status(404).json({ error: "User not found" });
 
+      if (user.status != "deactivated")
+        return res.status(400).json({ msg: "Account is already activated" });
       const otp = generateOTP();
       user.otp = otp;
       user.otpExpiration = new Date(Date.now() + 10 * 60 * 1000);
@@ -223,7 +229,8 @@ router
       await user.save();
 
       res.status(200).json({
-        msg: "User successfully registered, Verification message sent",
+        email: user.email,
+        msg: "Account activation code sent to your registered email",
       });
     } catch (error) {
       res.status(500).json({ error: error });
@@ -278,10 +285,12 @@ router
 
       sendVerificationEmail(otp, "Reset Password", "reset password");
 
-      user.isVerified = true;
-      await user.save();
-
-      res.status(200).json({ msg: "Password reset verificaion code sent, " });
+      res
+        .status(200)
+        .json({
+          msg: "Password reset verificaion code sent, ",
+          email: user.email,
+        });
       console.log(`${otp}`);
     } catch (error) {
       res.status(500).json({ error: error.message });

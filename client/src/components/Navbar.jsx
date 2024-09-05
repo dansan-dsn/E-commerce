@@ -6,10 +6,11 @@ import Date from "./cards/CurrentDate";
 import Cart from "./cards/Cart";
 import { RxDropdownMenu } from "react-icons/rx";
 import { Im500Px } from "react-icons/im";
+import { IoClose } from "react-icons/io5";
 
 const Navbar = () => {
   const [querySearch, setQuerySearch] = useState("");
-  const [isMenu, setIsMenu] = useState(false);
+  const [isMenu, setIsMenu] = useState(true);
 
   const handleChange = (e) => {
     setQuerySearch(e.target.value);
@@ -27,11 +28,20 @@ const Navbar = () => {
     <div className="sticky top-0 left-0 w-full bg-gray-900 z-50 py-3 px-1 shadow-gray-400 shadow">
       <div className="container mx-auto flex flex-col xs:justify-between items-center relative">
         <div className="flex w-full items-center justify-between">
-          <RxDropdownMenu
-            className="size-10 mr-10 bg-gray-400 translate duration-300 ease-in-out hover:scale-110 p-1 rounded hover:bg-gray-500 cursor-pointer"
+          {/* <RxDropdownMenu
+            
+          /> */}
+          <div
+            className=" mr-10  translate duration-300 rounded ease-in-out hover:scale-110  hover:bg-gray-500 cursor-pointer"
             title="Menu"
             onClick={handleMenu}
-          />
+          >
+            {isMenu ? (
+              <IoClose className=" p-1 size-10 text-gray-400 rounded" />
+            ) : (
+              <RxDropdownMenu className="size-10 bg-gray-400 p-1 rounded" />
+            )}
+          </div>
 
           <Link to="/dashboard" className=" font-bold ">
             <Im500Px className="size-10 -rotate-45 shadow-xl shadow-gray-500 p-1 cursor-pointer" />

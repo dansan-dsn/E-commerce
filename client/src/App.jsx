@@ -14,6 +14,7 @@ import Account from "./pages/Account";
 import Help from "./pages/Help";
 import UserInfo from "./pages/user_info";
 import ActivateAccount from "./pages/ActivateAccount";
+import ResetPassword from "./pages/ResetPassword";
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -37,7 +38,7 @@ const App = () => {
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Landing />} />
-            <Route path="/dashboard" element={<Home />} />
+            <Route path="/dashboard/:userId" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot_password" element={<ForgotPassword />} />
@@ -48,6 +49,7 @@ const App = () => {
             <Route path="/contact-us" element={<Help />} />
             <Route path="/user-info" element={<UserInfo />} />
             <Route path="/activate-account" element={<ActivateAccount />} />
+            <Route path="/reset_password" element={<ResetPassword />} />
           </Routes>
         )}
       </BrowserRouter>

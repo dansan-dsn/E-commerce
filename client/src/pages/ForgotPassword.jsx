@@ -5,21 +5,40 @@ import backgroundImg from "../assets/images/shop.jpg";
 import useImage from "../assets/images/shopping cart.jpeg";
 import { validateEmail } from "../utils/validator";
 import { IoIosArrowBack } from "react-icons/io";
+import axios from "axios";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const handlePasswordReset = (e) => {
+  const handlePasswordReset = async (e) => {
     e.preventDefault();
     if (!validateEmail(email)) {
       setError("Please enter a valid email address");
       return;
     }
-    setEmail("");
-    setError("");
-    navigate("/forgot_password/verify");
+    try {
+      const response = await axios.post(
+        "http://localhost:3003/user/forgot_password",
+        { email }
+      );
+      localStorage.setItem("userEmail", response.data.email);
+      if (response.status === 200) {
+        setEmail("");
+        setError("");
+        navigate("/verify");
+      }
+    } catch (error) {
+      if (error.response) {
+        const status = error.response.status;
+        if (status === 404) {
+          setError("Email is not found");
+        } else {
+          setError("An error occurred. Please try again.");
+        }
+      }
+    }
   };
   return (
     <div
@@ -39,9 +58,7 @@ const ForgotPassword = () => {
             Forgot Password
           </h2>
           {error && (
-            <p className="text-amber-300 w-full -mb-3 drop-shadow-2xl">
-              {error}
-            </p>
+            <p className="text-red-800 w-full -mb-3 drop-shadow-2xl">{error}</p>
           )}
           <p className="flex-none justify-start text-slate-300">
             Enter email to send password reset OTP*

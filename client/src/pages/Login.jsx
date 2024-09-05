@@ -33,10 +33,11 @@ const Login = () => {
       });
       localStorage.setItem("userEmail", response.data.email);
       if (response.status === 200) {
+        const userId = response.data.userId;
         setEmail("");
         setPassword("");
         setError("");
-        navigate("/dashboard");
+        navigate(`/dashboard/${userId}`);
       } else if (response.status === 201) {
         navigate("/verify");
       }

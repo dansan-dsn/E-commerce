@@ -82,9 +82,7 @@ const Register = () => {
             <span className="hidden md:block border-t-2 border-neutral-300 w-16 ml-4"></span>
           </div>
           {error && (
-            <p className="text-amber-300 w-full -mb-3 drop-shadow-2xl">
-              {error}
-            </p>
+            <p className="text-red-800 w-full -mb-3 drop-shadow-2xl">{error}</p>
           )}
           <form
             className="flex flex-col items-center"
