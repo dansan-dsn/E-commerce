@@ -76,9 +76,11 @@ router
 
       user.isVerified = true;
       user.save();
-      res
-        .status(200)
-        .json({ msg: "User is Verified", username: user.username });
+      res.status(200).json({
+        msg: "User is Verified",
+        username: user.username,
+        email: user.email,
+      });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -292,7 +294,7 @@ router
         msg: "Password reset verificaion code sent, ",
         email: user.email,
       });
-      console.log(`${otp}`);
+      console.log(`Forgot code: ${otp}`);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -317,7 +319,7 @@ router
 
       res.status(200).json({ msg: "Password updated successfully" });
     } catch (error) {
-      res.status(500).json({ error: error });
+      res.status(500).json({ error: error.message });
     }
   })
 

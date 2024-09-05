@@ -27,7 +27,7 @@ const ForgotPassword = () => {
       if (response.status === 200) {
         setEmail("");
         setError("");
-        navigate("/verify");
+        navigate("/verify", { state: { from: location.pathname } });
       }
     } catch (error) {
       if (error.response) {

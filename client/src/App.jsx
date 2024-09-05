@@ -49,7 +49,7 @@ const App = () => {
             <Route path="/contact-us" element={<Help />} />
             <Route path="/user-info" element={<UserInfo />} />
             <Route path="/activate-account" element={<ActivateAccount />} />
-            <Route path="/reset_password" element={<ResetPassword />} />
+            <Route path="/reset_password/:email" element={<ResetPassword />} />
           </Routes>
         )}
       </BrowserRouter>

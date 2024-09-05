@@ -23,16 +23,25 @@ const OtpVerification = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (location.pathname.startsWith("/forgot_password")) {
-      const storedEmail = localStorage.getItem("userEmail");
-      if (storedEmail) {
-        navigate(`/reset_password?email=${encodeURIComponent(storedEmail)}`);
-      } else {
-        setMessage("Email not found. Please register or log in first.");
-      }
-    }
-  }, [location, navigate]);
+  // useEffect(() => {
+  // console.log("Location:", location.state.from);
+  // const storedEmail = localStorage.getItem("userEmail");
+  // if (window.location.pathname.startsWith("/forgot_password")) {
+  //   if (storedEmail) {
+  //     navigate(`/reset_password?email=${encodeURIComponent(storedEmail)}`);
+  //   } else {
+  //     setMessage("Email not found. Please register or log in first.");
+  //   }
+  // }
+  //   if (location.state && location.state.from) {
+  //     const previousPath = location.state.from;
+  //     if (previousPath.startsWith("/forgot_password")) {
+  //       navigate("/reset_password", { state: { email: location.state.email } });
+  //     } else {
+  //       setMessage("Email not found. Please register or log in first.");
+  //     }
+  //   }
+  // }, [location, navigate]);
 
   const handleChange = (e, index) => {
     const newCode = [...code];
@@ -52,6 +61,12 @@ const OtpVerification = () => {
       if (response.status === 200) {
         if (!response.data.username) {
           navigate("/user-info");
+        } else if (location.state && location.state.from) {
+          const previousPath = location.state.from;
+          if (previousPath.startsWith("/forgot_password")) {
+            const userEmail = response.data.email;
+            navigate(`/reset_password/${userEmail}`);
+          }
         } else {
           navigate("/login");
         }
@@ -157,7 +172,7 @@ const OtpVerification = () => {
               className="w-full mt-10 p-2 rounded bg-amber-700 hover:bg-amber-600 text-white"
               disabled={!email}
             >
-              Reset Password
+              Verify Account
             </button>
             {message && (
               <p className="bg-neutral-400 rounded mt-1 text-red-700">
