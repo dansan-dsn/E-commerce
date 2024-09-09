@@ -8,6 +8,7 @@ const OtpVerification = () => {
   const [code, setCode] = useState(["", "", "", "", ""]);
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
+  const [success, setSuccess] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -23,26 +24,6 @@ const OtpVerification = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  // console.log("Location:", location.state.from);
-  // const storedEmail = localStorage.getItem("userEmail");
-  // if (window.location.pathname.startsWith("/forgot_password")) {
-  //   if (storedEmail) {
-  //     navigate(`/reset_password?email=${encodeURIComponent(storedEmail)}`);
-  //   } else {
-  //     setMessage("Email not found. Please register or log in first.");
-  //   }
-  // }
-  //   if (location.state && location.state.from) {
-  //     const previousPath = location.state.from;
-  //     if (previousPath.startsWith("/forgot_password")) {
-  //       navigate("/reset_password", { state: { email: location.state.email } });
-  //     } else {
-  //       setMessage("Email not found. Please register or log in first.");
-  //     }
-  //   }
-  // }, [location, navigate]);
-
   const handleChange = (e, index) => {
     const newCode = [...code];
     newCode[index] = e.target.value;
@@ -52,6 +33,8 @@ const OtpVerification = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const otp = code.join("");
+    setSuccess("");
+    setMessage("");
 
     try {
       const response = await axios.post(`${url}/verify`, {
@@ -96,12 +79,13 @@ const OtpVerification = () => {
 
   const handleNewCode = async (e) => {
     e.preventDefault();
+    setSuccess("");
     try {
       const response = await axios.post(`${url}/new-otp`, {
         email,
       });
       if (response.status === 200) {
-        setMessage("Verification code sent successfully");
+        setSuccess("New code sent successfully");
       }
     } catch (err) {
       if (err.response) {
@@ -131,15 +115,22 @@ const OtpVerification = () => {
       style={{ backgroundImage: `url(${useImage})` }}
     >
       <div
-        className="flex border shadow-2xl w-full md:w-3/4 px-6 md:px-36 justify-center items-center rounded-xl flex-col bg-white bg-cover bg-center"
+        className=" relative flex border shadow-2xl w-full md:w-3/4 px-6 md:px-36 justify-center items-center rounded-xl flex-col bg-white bg-cover bg-center"
         style={{ backgroundImage: `url(${backgroundImg})` }}
       >
-        <div>
+        {success && (
+          <p
+            className={`absolute top-0 bg-green-600 m-2 translate-y-2 delay-100 duration-100 p-2 rounded`}
+          >
+            {success}
+          </p>
+        )}
+        <div className="bg-transparent shadow-neutral-200 p-4 rounded shadow-inner">
           <h2 className="text-2xl font-extrabold capitalize">
             Account Verification
           </h2>
           <form className="flex flex-col" onSubmit={handleSubmit}>
-            <p className="text-center mt-4">
+            <p className="text-center mt-4 font-semibold">
               {email
                 ? `Please enter the code we sent to ${email}`
                 : "Email not found. Please register or log in first."}

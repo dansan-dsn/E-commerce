@@ -110,15 +110,24 @@ router
         });
       }
 
+      if (user.otpRequests === 6) {
+        return setTimeout(() => {
+          user.otpRequests = 0;
+        }, 100000);
+      } else if (currentTime - user.lastOtpRequest > OTP_WINDOW_MS) {
+        user.otpRequests = 0;
+        await user.save();
+      } else {
+        // Update request tracking
+        user.otpRequests = (user.otpRequests || 0) + 1;
+        user.lastOtpRequest = currentTime;
+        await user.save();
+      }
+
       // generate another otp
       const otp = generateOTP();
       user.otp = otp;
       user.otpExpiration = new Date(Date.now() + 10 * 60 * 1000);
-
-      // Update request tracking
-      user.otpRequests = (user.otpRequests || 0) + 1;
-      user.lastOtpRequest = currentTime;
-      await user.save();
 
       console.log(`Your new OTP is ${otp}`);
 
