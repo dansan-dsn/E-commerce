@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/dansan-dsn/E-commerce.git"
   },
-  "author": "d.s.n",
+  "author": "Dansan Ankunda",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/dansan-dsn/E-commerce/issues"
@@ -22,6 +22,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "iconv-lite": "^0.6.3",
+    "mongoose": "^8.13.2",
     "mysql2": "^3.11.0",
     "nodemailer": "^6.9.14",
     "sequelize": "^6.37.3"

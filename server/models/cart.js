@@ -1,33 +1,20 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../database/database");
-const User = require("../models/user");
+const mongoose = require("mongoose");
 
-const Cart = sequelize.define(
-  "Cart",
+const cartSchema = new mongoose.Schema(
   {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
     userId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: User,
-        key: "id",
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
     totalAmount: {
-      type: DataTypes.FLOAT,
-      defaultValue: 0,
+      type: Number,
+      default: 0,
     },
   },
   {
-    timestamps: true,
+    timestamps: true, // adds createdAt and updatedAt fields
   }
 );
 
-Cart.belongsTo(User, { foreignKey: "userId" });
-User.hasOne(Cart, { foreignKey: "userId" });
-
-module.exports = Cart;
+module.exports = mongoose.model("Cart", cartSchema);

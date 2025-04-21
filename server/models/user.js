@@ -1,80 +1,49 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../database/database");
-const bcrypt = require("bcryptjs");
+const mongoose = require("mongoose");
 
-const User = sequelize.define(
-  "User",
+const userSchema = new mongoose.Schema(
   {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
     email: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: String,
+      required: true,
       unique: true,
     },
     password: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: String,
+      required: true,
     },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    phone: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
+    username: String,
+    phone: String,
     role: {
-      type: DataTypes.ENUM("admin", "user"),
-      defaultValue: "user",
+      type: String,
+      enum: ["admin", "user"],
+      default: "user",
     },
-    address: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    otp: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    otpExpiration: {
-      type: DataTypes.DATE,
-      allowNull: true,
-    },
+    address: String,
+    otp: String,
+    otpExpiration: Date,
     otpRequests: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
+      type: Number,
+      default: 0,
     },
     lastOtpRequest: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      defaultValue: DataTypes.NOW,
+      type: Date,
+      default: Date.now,
     },
-    lastLogin: {
-      type: DataTypes.DATE,
-      allowNull: true,
-    },
+    lastLogin: Date,
     status: {
-      type: DataTypes.ENUM("active", "deactivated", "pending"),
-      defaultValue: "pending",
+      type: String,
+      enum: ["active", "deactivated", "pending"],
+      default: "pending",
     },
     isVerified: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      type: Boolean,
+      default: false,
     },
   },
-  {
-    timestamps: true,
-    hooks: {
-      beforeSave: async (user) => {
-        if (user.changed("password")) {
-          user.password = await bcrypt.hash(user.password, 10);
-        }
-      },
-    },
-  }
+  { timestamps: true }
 );
 
-module.exports = User;
+module.exports = mongoose.model("User", userSchema);
+
+const userModel = mongoose.model("Users", userSchema);
+module.exports = userModel;
