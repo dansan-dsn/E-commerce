@@ -1,27 +1,84 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Container, Box, Typography, Button, useTheme } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 const NotFound = () => {
+  const theme = useTheme();
+
   return (
-    <div className="p-10 bg-slate-500 min-h-screen flex items-center justify-center flex-col">
-      <div className="">
-        <Link
-          to={"/"}
-          className="text-white rounded border border-blue-300 p-2 m-10 bg-blue-300 hover:bg-blue-500"
+    <Container
+      maxWidth="sm"
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+        py: 4,
+      }}
+    >
+      <Box
+        sx={{
+          p: 4,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 2,
+        }}
+      >
+        <ErrorOutlineIcon
+          sx={{
+            fontSize: 80,
+            color: theme.palette.mode === "dark" ? "error.light" : "error.main",
+          }}
+        />
+
+        <Typography
+          variant="h3"
+          component="h1"
+          sx={{
+            fontWeight: 700,
+            color: "text.primary",
+          }}
         >
-          Home
-        </Link>
-        <div className="bg-slate-400 p-14 md:p-52 md:-mt-4 ">
-          <h1 className="uppercase font-bold text-5xl text-center my-5">404</h1>
-          <p className="uppercase font-semibold text-2xl text-center my-5">
-            page not found
-          </p>
-          <p className="text-center text-amber-700 my-5">
-            let's try something else
-          </p>
-        </div>
-      </div>
-    </div>
+          404
+        </Typography>
+
+        <Typography
+          variant="h5"
+          sx={{
+            mb: 2,
+            color: "text.secondary",
+          }}
+        >
+          Page Not Found
+        </Typography>
+
+        <Typography
+          variant="body1"
+          sx={{
+            mb: 3,
+            color: "text.secondary",
+          }}
+        >
+          The page you're looking for doesn't exist or has been moved.
+        </Typography>
+
+        <Button
+          component={RouterLink}
+          to="/"
+          variant="contained"
+          size="large"
+          sx={{
+            px: 4,
+            py: 1.5,
+            fontWeight: 600,
+          }}
+        >
+          Return Home
+        </Button>
+      </Box>
+    </Container>
   );
 };
 

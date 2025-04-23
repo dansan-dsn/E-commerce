@@ -1,60 +1,39 @@
-import react, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Loader from "./components/cards/Loader";
+import { useState } from "react";
+import { ThemeProvider, CssBaseline, IconButton } from "@mui/material";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { lightTheme, darkTheme } from "./theme"; // Now using named exports
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import Signup from "./pages/auth/Signup";
+import Signin from "./pages/auth/Signin";
+import Home from "./pages/app/Home";
 import NotFound from "./pages/NotFound";
-import Landing from "./pages/Landing";
-import Home from "./pages/Home";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import ForgotPassword from "./pages/ForgotPassword";
-import OtpVerification from "./pages/OtpVerification";
-import Orders from "./pages/Orders";
-import Categories from "./pages/Categories";
-import Account from "./pages/Account";
-import Help from "./pages/Help";
-import UserInfo from "./pages/user_info";
-import ActivateAccount from "./pages/ActivateAccount";
-import ResetPassword from "./pages/ResetPassword";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 
-const App = () => {
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const handleStart = () => setLoading(true);
-    const handleComplete = () => setLoading(false);
-
-    handleStart();
-    const timeoutId = setTimeout(handleComplete, 1000); // delay
-
-    return () => clearTimeout(timeoutId);
-  }, []);
+function App() {
+  const [darkMode, setDarkMode] = useState(false);
 
   return (
-    <>
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+      <CssBaseline />
+      <IconButton
+        onClick={() => setDarkMode(!darkMode)}
+        sx={{ position: "fixed", top: 16, right: 16, zIndex: 9999 }}
+      >
+        {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+      </IconButton>
+
       <BrowserRouter>
-        {loading ? (
-          <Loader />
-        ) : (
-          <Routes>
-            <Route path="*" element={<NotFound />} />
-            <Route path="/" element={<Landing />} />
-            <Route path="/dashboard/:userId" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forgot_password" element={<ForgotPassword />} />
-            <Route path="/verify" element={<OtpVerification />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/categories" element={<Categories />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/contact-us" element={<Help />} />
-            <Route path="/user-info" element={<UserInfo />} />
-            <Route path="/activate-account" element={<ActivateAccount />} />
-            <Route path="/reset_password/:email" element={<ResetPassword />} />
-          </Routes>
-        )}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Signin />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </BrowserRouter>
-    </>
+    </ThemeProvider>
   );
-};
+}
 
 export default App;
