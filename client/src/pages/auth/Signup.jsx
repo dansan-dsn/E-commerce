@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/dsn.svg";
+import PasswordInput from "../../components/auth/PasswordInput";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -113,29 +114,26 @@ export default function Signup() {
           sx={{ mb: 1 }}
         />
 
-        <TextField
+        <PasswordInput
           label="Password"
-          type="password"
           name="password"
-          size="small"
           value={formData.password}
           onChange={handleChange}
           required
           fullWidth
           inputProps={{ minLength: 6 }}
-          sx={{ mb: 1 }}
+          sx={{ mb: 1, color: "text.tertiary" }}
         />
 
-        <TextField
+        <PasswordInput
           label="Confirm Password"
-          type="password"
           name="confirmPassword"
-          size="small"
           value={formData.confirmPassword}
           onChange={handleChange}
           required
           fullWidth
-          sx={{ mb: 2 }}
+          inputProps={{ minLength: 6 }}
+          sx={{ mb: 1, color: "text.tertiary" }}
         />
 
         <Button

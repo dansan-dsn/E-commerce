@@ -3,40 +3,57 @@ import {
   Container,
   Box,
   Typography,
-  TextField,
-  Checkbox,
   Button,
   Alert,
   Stack,
-  Link,
 } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/dsn.svg";
 import PasswordInput from "../../components/auth/PasswordInput";
 
-export default function Signin() {
+export default function ResetPassword() {
   const [formData, setFormData] = useState({
-    email: "",
     password: "",
+    confirmPassword: "",
   });
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords don't match");
+      return;
+    }
+
+    if (formData.password.length < 8) {
+      setError("Password must be at least 8 characters");
+      return;
+    }
+
     setLoading(true);
+    setError("");
+
+    // Mock API call
     setTimeout(() => {
-      console.log("Mock submission:", formData);
-      navigate("/");
+      console.log("Password reset successful:", formData.password);
       setLoading(false);
+      setSuccess(true);
+
+      // Redirect after 2 seconds
+      setTimeout(() => navigate("/login"), 2000);
     }, 1500);
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Clear error when user starts typing
+    if (error) setError("");
   };
 
   return (
@@ -63,7 +80,7 @@ export default function Signin() {
       >
         <Box
           component="img"
-          src={logo} // or require('./assets/logo.png')
+          src={logo}
           alt="Company Logo"
           sx={{
             height: 60,
@@ -75,105 +92,104 @@ export default function Signin() {
 
         <Typography
           variant="h5"
-          align="center"
           gutterBottom
           sx={{
             fontWeight: 600,
-            color: "primary.main",
+            color: "text.primary",
             mb: 2,
+            textAlign: "center",
           }}
         >
-          Welcome Back
+          Create New Password
+          <Typography
+            component="span"
+            sx={{
+              display: "block",
+              fontSize: "1rem",
+              fontWeight: 400,
+              color: "text.secondary",
+              mt: 1,
+            }}
+          >
+            Your new password must be different from previous passwords
+          </Typography>
         </Typography>
 
+        {success && (
+          <Alert severity="success" sx={{ mb: 2 }}>
+            Password updated successfully! Redirecting to login...
+          </Alert>
+        )}
+
         {error && (
-          <Alert severity="error" sx={{ mb: 1 }}>
+          <Alert severity="error" sx={{ mb: 2 }}>
             {error}
           </Alert>
         )}
 
-        <TextField
-          label="Email"
-          type="email"
-          name="email"
-          size="small"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          fullWidth
-          sx={{ mb: 1 }}
-        />
-
         <PasswordInput
-          label="Password"
+          label="New Password"
           name="password"
           value={formData.password}
           onChange={handleChange}
           required
           fullWidth
-          inputProps={{ minLength: 6 }}
-          sx={{ mb: 1, color: "text.tertiary" }}
+          sx={{ mb: 2 }}
+          inputProps={{ minLength: 8 }}
         />
-        <Stack
-          direction="row"
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-          spacing={0.5}
-        >
-          <Typography variant="body2" color="text.tertiary">
-            <Checkbox defaultChecked size="small" />
-            Remember me
-          </Typography>
-          <Link
-            component={RouterLink}
-            to="/forgot-password"
-            color="primary.main"
-            fontWeight={500}
-            sx={{}}
-            underline="hover"
-          >
-            Forgot Password
-          </Link>
-        </Stack>
+
+        <PasswordInput
+          label="Confirm Password"
+          name="confirmPassword"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          required
+          fullWidth
+          sx={{ mb: 2 }}
+          inputProps={{ minLength: 8 }}
+        />
 
         <Button
           type="submit"
           variant="contained"
-          size="medium"
-          disabled={loading}
+          size="large"
+          disabled={loading || success}
           fullWidth
           sx={{
             fontWeight: 600,
             letterSpacing: 0.5,
+            py: 1.5,
             bgcolor: "primary.main",
             "&:hover": {
               bgcolor: "primary.dark",
             },
           }}
         >
-          {loading ? "Logging in..." : "Login"}
+          {loading ? "Updating..." : "Reset Password"}
         </Button>
 
         <Stack
           direction="row"
           justifyContent="center"
-          spacing={0.5}
+          spacing={1}
           sx={{ mt: 2 }}
         >
-          <Typography variant="body2" color="text.tertiary">
-            Have an account?
+          <Typography variant="body2" color="text.secondary">
+            Remember your password?
           </Typography>
-          <Link
+          <Button
             component={RouterLink}
-            to="/signup"
-            color="primary.main"
-            fontWeight={500}
+            to="/login"
+            size="small"
+            sx={{
+              minWidth: "auto",
+              p: 0,
+              fontWeight: 500,
+              color: "primary.main",
+            }}
           >
-            Sign Up
-          </Link>
+            Login
+          </Button>
         </Stack>
       </Box>
     </Container>

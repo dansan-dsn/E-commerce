@@ -1,36 +1,60 @@
 import { useState } from "react";
-import { ThemeProvider, CssBaseline, IconButton } from "@mui/material";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { lightTheme, darkTheme } from "./theme"; // Now using named exports
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
+import {
+  ThemeProvider as MuiThemeProvider,
+  CssBaseline,
+  useTheme,
+} from "@mui/material";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { lightTheme, darkTheme } from "./theme";
+import { ThemeProvider, useThemeContext } from "./contexts/ThemeContext";
+import Navbar from "./components/navbar/Navbar";
+// auth routes
 import Signup from "./pages/auth/Signup";
 import Signin from "./pages/auth/Signin";
-import Home from "./pages/app/Home";
 import NotFound from "./pages/NotFound";
 import ForgotPassword from "./pages/auth/ForgotPassword";
+import VerifyEmail from "./pages/auth/VerifyEmail";
+import ResetPassword from "./pages/auth/ResetPassword";
+// main routes
+import Home from "./pages/app/Home";
 
-function App() {
-  const [darkMode, setDarkMode] = useState(false);
+const authRoutes = [
+  "/signup",
+  "/login",
+  "/forgot-password",
+  "/verify-email",
+  "/reset-password",
+];
+
+function AppContent() {
+  const { darkMode } = useThemeContext();
+  const location = useLocation();
+  const isAuthRoute = authRoutes.includes(location.pathname);
 
   return (
-    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+    <MuiThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <CssBaseline />
-      <IconButton
-        onClick={() => setDarkMode(!darkMode)}
-        sx={{ position: "fixed", top: 16, right: 16, zIndex: 9999 }}
-      >
-        {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
-      </IconButton>
+      {!isAuthRoute && <Navbar />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Signin />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        {/* Add other routes here */}
+        {/* Catch-all route for 404 */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </MuiThemeProvider>
+  );
+}
 
+function App() {
+  return (
+    <ThemeProvider>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Signin />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AppContent />
       </BrowserRouter>
     </ThemeProvider>
   );
