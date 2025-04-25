@@ -1,5 +1,5 @@
-import heroAbout from "../assets/about-hero.svg";
-import categoryImg from "../assets/category_img_01.jpg";
+import heroAbout from "@assets/about-hero.svg";
+import categoryImg from "@assets/category_img_01.jpg";
 
 export const products = [
   {

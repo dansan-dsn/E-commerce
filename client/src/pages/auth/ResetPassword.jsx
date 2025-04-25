@@ -8,8 +8,8 @@ import {
   Stack,
 } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import logo from "../../assets/dsn.svg";
-import PasswordInput from "../../components/auth/PasswordInput";
+import logo from "@assets/dsn.svg";
+import PasswordInput from "@components/auth/PasswordInput";
 
 export default function ResetPassword() {
   const [formData, setFormData] = useState({

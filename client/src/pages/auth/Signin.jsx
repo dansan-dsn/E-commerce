@@ -11,8 +11,8 @@ import {
   Link,
 } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import logo from "../../assets/dsn.svg";
-import PasswordInput from "../../components/auth/PasswordInput";
+import logo from "@assets/dsn.svg";
+import PasswordInput from "@components/auth/PasswordInput";
 
 export default function Signin() {
   const [formData, setFormData] = useState({

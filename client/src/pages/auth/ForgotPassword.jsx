@@ -10,7 +10,7 @@ import {
   Link,
 } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import logo from "../../assets/dsn.svg";
+import logo from "@assets/dsn.svg";
 
 export default function ForgotPassword() {
   const [formData, setFormData] = useState({

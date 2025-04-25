@@ -1,7 +1,7 @@
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "@mui/material";
 import { useMediaQuery, useTheme } from "@mui/material";
-import logo from "../../assets/brand_01.png";
+import logo from "@assets/brand_01.png";
 
 export const NavbarLogo = ({ searchOpen }) => {
   const theme = useTheme();

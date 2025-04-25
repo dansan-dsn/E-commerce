@@ -1,6 +1,6 @@
 import { IconButton } from "@mui/material";
 import { LightMode, DarkMode } from "@mui/icons-material";
-import { useThemeContext } from "../../contexts/ThemeContext";
+import { useThemeContext } from "@contexts/ThemeContext";
 
 export const ThemeToggle = () => {
   const { darkMode, toggleTheme } = useThemeContext();

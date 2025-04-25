@@ -1,13 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Box, Container, Typography, IconButton } from "@mui/material";
-import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-import ProductCard from "../../components/main/ProductCard";
-import cover_img from "../../assets/cover_front.png";
-import { products } from "../../utils/products";
+import { Box, Container } from "@mui/material";
+import { products } from "@utils/products";
+import HeroBanner from "@components/main/home/HeroBanner";
+import SectionHeader from "@components/main/home/SectionHeader";
+import ProductCarousel from "@components/main/home/ProductCarousel";
+import ProductGrid from "@components/main/home/ProductGrid";
+import Footer from "@components/main/Footer";
 
 const Home = () => {
   const containerRef = useRef(null);
-  const scrollRef = useRef(null);
   const [useCarousel, setUseCarousel] = useState(false);
   const topDeals = products.slice(0, 6);
 
@@ -17,9 +18,9 @@ const Home = () => {
       if (containerRef.current) {
         const container = containerRef.current;
         const containerWidth = container.offsetWidth;
-        const padding = 48; // Total horizontal padding (24px each side)
-        const gap = 24; // Gap between items
-        const minCardWidth = 220; // Minimum card width you want
+        const padding = 48;
+        const gap = 24;
+        const minCardWidth = 220;
         const totalWidthNeeded = 6 * minCardWidth + 5 * gap + padding;
 
         setUseCarousel(containerWidth < totalWidthNeeded);
@@ -33,16 +34,6 @@ const Home = () => {
     return () => resizeObserver.disconnect();
   }, []);
 
-  const scroll = (direction) => {
-    if (scrollRef.current) {
-      const scrollAmount = 300;
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
-
   return (
     <Box
       sx={{
@@ -50,7 +41,6 @@ const Home = () => {
         backgroundColor: "background.default",
       }}
     >
-      {/* Recent Top Deals Section */}
       <Container
         maxWidth="xl"
         ref={containerRef}
@@ -62,109 +52,22 @@ const Home = () => {
           },
         }}
       >
-        {/* Hero Banner Section */}
-        <Box
-          sx={{
-            height: 400,
-            backgroundImage: `url(${cover_img})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            mb: 4,
-            borderRadius: 1,
-            boxShadow: 3,
-          }}
-        />
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            mb: 3,
-          }}
-        >
-          <Typography variant="h5" fontWeight={600}>
-            Recent Top Deals
-          </Typography>
-          <Typography
-            variant="body2"
-            color="primary"
-            sx={{
-              cursor: "pointer",
-              "&:hover": { textDecoration: "underline" },
-            }}
-          >
-            Show more
-          </Typography>
-        </Box>
+        <HeroBanner />
 
-        {/* Products Container */}
-        <Box sx={{ position: "relative" }}>
-          {useCarousel && (
-            <>
-              <IconButton
-                onClick={() => scroll("left")}
-                sx={{
-                  position: "absolute",
-                  left: -16,
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  zIndex: 2,
-                  backgroundColor: "background.paper",
-                  boxShadow: 2,
-                  "&:hover": { backgroundColor: "action.hover" },
-                }}
-              >
-                <ChevronLeft />
-              </IconButton>
-              <IconButton
-                onClick={() => scroll("right")}
-                sx={{
-                  position: "absolute",
-                  right: -16,
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  zIndex: 2,
-                  backgroundColor: "background.paper",
-                  boxShadow: 2,
-                  "&:hover": { backgroundColor: "action.hover" },
-                }}
-              >
-                <ChevronRight />
-              </IconButton>
-            </>
-          )}
+        <SectionHeader title="Recent Top Deals" showMore />
 
-          <Box
-            ref={scrollRef}
-            sx={{
-              display: "flex",
-              gap: 3,
-              overflowX: useCarousel ? "auto" : "hidden",
-              flexWrap: useCarousel ? "nowrap" : "wrap",
-              scrollBehavior: "smooth",
-              pb: 2,
-              "&::-webkit-scrollbar": { display: "none" },
-              ...(!useCarousel && {
-                justifyContent: "space-between",
-              }),
-            }}
-          >
-            {topDeals.map((product) => (
-              <Box
-                key={product.id}
-                sx={{
-                  flex: useCarousel ? "0 0 280px" : "0 0 calc(16.666% - 20px)",
-                  minWidth: 0,
-                  ...(!useCarousel && {
-                    maxWidth: "calc(16.666% - 20px)",
-                  }),
-                }}
-              >
-                <ProductCard product={product} />
-              </Box>
-            ))}
-          </Box>
-        </Box>
+        {useCarousel ? (
+          <ProductCarousel products={topDeals} />
+        ) : (
+          <ProductGrid products={topDeals} />
+        )}
+        <SectionHeader title="All Products" showMore />
+        {useCarousel ? (
+          <ProductCarousel products={products} />
+        ) : (
+          <ProductGrid products={products} />
+        )}
+        <Footer />
       </Container>
     </Box>
   );

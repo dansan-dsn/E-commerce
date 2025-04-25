@@ -5,18 +5,19 @@ import {
   useTheme,
 } from "@mui/material";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { lightTheme, darkTheme } from "./theme";
-import { ThemeProvider, useThemeContext } from "./contexts/ThemeContext";
-import Navbar from "./components/navbar/Navbar";
+import { lightTheme, darkTheme } from "@theme";
+import { ThemeProvider, useThemeContext } from "@contexts/ThemeContext";
+import Navbar from "@components/navbar/Navbar";
 // auth routes
-import Signup from "./pages/auth/Signup";
-import Signin from "./pages/auth/Signin";
-import NotFound from "./pages/NotFound";
-import ForgotPassword from "./pages/auth/ForgotPassword";
-import VerifyEmail from "./pages/auth/VerifyEmail";
-import ResetPassword from "./pages/auth/ResetPassword";
+import Signup from "@pages/auth/Signup";
+import Signin from "@pages/auth/Signin";
+import NotFound from "@pages/NotFound";
+import ForgotPassword from "@pages/auth/ForgotPassword";
+import VerifyEmail from "@pages/auth/VerifyEmail";
+import ResetPassword from "@pages/auth/ResetPassword";
 // main routes
-import Home from "./pages/app/Home";
+import Home from "@pages/app/Home";
+import ProductDetails from "@pages/app/ProductDetails";
 
 const authRoutes = [
   "/signup",
@@ -42,8 +43,9 @@ function AppContent() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        {/* Add other routes here */}
-        {/* Catch-all route for 404 */}
+        <Route path="/products/:id" element={<ProductDetails />} />
+        {/* Add more routes as needed */}
+        {/* 404 Not Found */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </MuiThemeProvider>
