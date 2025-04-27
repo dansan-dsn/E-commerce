@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import ProductCard from "../ProductCard";
+import ProductCard from "@components/main/products/ProductCard";
 
 const ProductGrid = ({ products }) => (
   <Box

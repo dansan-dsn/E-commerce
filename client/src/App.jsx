@@ -18,6 +18,7 @@ import ResetPassword from "@pages/auth/ResetPassword";
 // main routes
 import Home from "@pages/app/Home";
 import ProductDetails from "@pages/app/ProductDetails";
+import Profile from "@pages/app/Profile";
 
 const authRoutes = [
   "/signup",
@@ -44,6 +45,7 @@ function AppContent() {
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path="/profile" element={<Profile />} />
         {/* Add more routes as needed */}
         {/* 404 Not Found */}
         <Route path="*" element={<NotFound />} />

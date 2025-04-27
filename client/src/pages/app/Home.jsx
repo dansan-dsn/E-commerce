@@ -61,7 +61,7 @@ const Home = () => {
         ) : (
           <ProductGrid products={topDeals} />
         )}
-        <SectionHeader title="All Products" showMore />
+        <SectionHeader title="New Arrivals" showMore />
         {useCarousel ? (
           <ProductCarousel products={products} />
         ) : (

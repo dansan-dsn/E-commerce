@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Box, IconButton } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-import ProductCard from "@components/main/ProductCard";
+import ProductCard from "@components/main/products/ProductCard";
 
 const ProductCarousel = ({ products }) => {
   const scrollRef = useRef(null);

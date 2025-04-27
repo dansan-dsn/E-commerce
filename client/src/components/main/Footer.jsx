@@ -90,13 +90,13 @@ const Footer = () => {
               On Delivery
             </Typography>
             <Typography color="#546e7a" display="block" mb={1}>
-              FAQ
+              Paypal
             </Typography>
             <Typography color="#546e7a" display="block" mb={1}>
-              Privacy Policy
+              Mobile Money
             </Typography>
             <Typography color="#546e7a" display="block" mb={1}>
-              Terms
+              Bank Account
             </Typography>
           </Grid>
         </Grid>

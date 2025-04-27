@@ -14,6 +14,10 @@ import {
 } from "@mui/material";
 import { Favorite, FavoriteBorder, Add, Remove } from "@mui/icons-material";
 import img from "@assets/feature_prod_01.jpg";
+import ImageSlider from "@components/main/products/ImageSlider";
+import Reviews from "@components/main/products/Reviews";
+import Sepecifications from "@components/main/products/Specifications";
+import Footer from "@components/main/Footer";
 
 const ProductPage = () => {
   const [quantity, setQuantity] = useState(1);
@@ -25,7 +29,7 @@ const ProductPage = () => {
       'Apple MacBook Pro (15" Retina, Touch Bar, 2.2GHz 6‑Core i7, 16GB RAM, 256GB SSD)',
     price: 1200,
     originalPrice: 2400,
-    images: [img, img, img, img],
+    images: [img, img],
     tags: ["Computer", "Mac Book", "MacBook Pro", "Laptop"],
     stock: "Available",
     ratingCount: 8,
@@ -40,42 +44,32 @@ const ProductPage = () => {
   );
 
   return (
-    <Box sx={{ backgroundColor: "#0d1117", color: "#c9d1d9", py: 6 }}>
-      <Container maxWidth="lg">
-        <Paper elevation={3} sx={{ backgroundColor: "#161b22", p: 3 }}>
-          <Grid container spacing={4}>
+    <Box
+      sx={{
+        pt: { xs: 15, sm: 17 },
+        color: "#c9d1d9",
+        py: 6,
+      }}
+    >
+      <Container maxWidth="xl">
+        <Paper elevation={3} sx={{ p: 3 }}>
+          <Box
+            sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}
+            gap={3}
+          >
             {/* Image Section */}
-            <Grid item xs={12} md={6}>
-              <img
-                src={product.images[0]}
-                alt="Main product"
-                style={{
-                  width: "100%",
-                  maxHeight: "400px",
-                  objectFit: "cover",
-                  borderRadius: "8px",
-                }}
-              />
-              <Stack direction="row" spacing={1} mt={2}>
-                {product.images.map((img, idx) => (
-                  <Box
-                    key={idx}
-                    component="img"
-                    src={img}
-                    alt={`Thumb ${idx + 1}`}
-                    sx={{
-                      width: 70,
-                      height: 50,
-                      objectFit: "cover",
-                      borderRadius: 1,
-                      border: "2px solid #30363d",
-                      cursor: "pointer",
-                    }}
-                  />
-                ))}
-              </Stack>
+            <Grid
+              item
+              xs={12}
+              md={6}
+              sx={{
+                width: "100%",
+                maxWidth: "600px",
+                mx: "auto", // centers the container
+              }}
+            >
+              <ImageSlider images={product.images} />
             </Grid>
-
             {/* Details Section */}
             <Grid item xs={12} md={6}>
               <Typography variant="h5" fontWeight={600} gutterBottom>
@@ -118,18 +112,6 @@ const ProductPage = () => {
                 size="small"
                 sx={{ mb: 2 }}
               />
-
-              <Stack direction="row" spacing={1} sx={{ my: 2 }}>
-                {product.tags.map((tag) => (
-                  <Chip
-                    key={tag}
-                    label={tag}
-                    variant="outlined"
-                    size="small"
-                    sx={{ color: "#58a6ff", borderColor: "#30363d" }}
-                  />
-                ))}
-              </Stack>
 
               {/* Quantity Selector */}
               <Stack
@@ -190,7 +172,7 @@ const ProductPage = () => {
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
+          </Box>
 
           {/* Tabs Section */}
           <Box sx={{ mt: 5 }}>
@@ -202,28 +184,19 @@ const ProductPage = () => {
             >
               <Tab label="Description" />
               <Tab label="Specifications" />
-              <Tab label="Reviews" />
+              <Tab label="Ratings and Reviews" />
             </Tabs>
             <Box sx={{ mt: 2 }}>
               {tabIndex === 0 && (
-                <Typography variant="body2" sx={{ whiteSpace: "pre-line" }}>
-                  {product.description}
-                </Typography>
+                <Typography variant="body2">{product.description}</Typography>
               )}
-              {tabIndex === 1 && (
-                <Typography variant="body2">
-                  Technical specs go here.
-                </Typography>
-              )}
-              {tabIndex === 2 && (
-                <Typography variant="body2">
-                  Customer reviews go here.
-                </Typography>
-              )}
+              {tabIndex === 1 && <Sepecifications />}
+              {tabIndex === 2 && <Reviews />}
             </Box>
           </Box>
         </Paper>
       </Container>
+      <Footer />
     </Box>
   );
 };
