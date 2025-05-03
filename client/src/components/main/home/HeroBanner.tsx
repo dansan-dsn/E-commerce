@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import cover_img from "@assets/cover_front.png";
+import cover_img from "@/assets/images/cover_front.png";
 
 const HeroBanner = () => (
   <Box

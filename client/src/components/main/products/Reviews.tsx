@@ -2,13 +2,15 @@ import {
   Box,
   Button,
   Modal,
-  TextareaAutosize,
+  TextField,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { useState, useMemo } from "react";
 import Rating from "@mui/material/Rating";
 import Pagination from "@mui/material/Pagination";
 import CancelIcon from "@mui/icons-material/Cancel";
+// import { ThemeProvider, useTheme } from "@mui/material";
 
 const reviews = [
   {
@@ -87,7 +89,9 @@ const Reviews = () => {
 
   const totalReviews = reviews.length;
   const totalStars = reviews.reduce((acc, review) => acc + review.stars, 0);
-  const averageStarRating = ((totalStars / (totalReviews * 5)) * 10).toFixed(1);
+  const averageStarRating = parseFloat(
+    (totalStars / (totalReviews * 5)) * 10
+  ).toFixed(1);
 
   const handlePageChange = (event, page) => {
     setCurrentPage(page);
@@ -194,7 +198,7 @@ const Reviews = () => {
                 </Box>
               </Box>
               <Box variant="div">
-                <Rating name="half-rating" vdefaultValue={0} precision={0.5} />
+                <Rating name="half-rating" defaultValue={0} precision={0.5} />
                 <Typography
                   id="modal-description"
                   sx={{
@@ -206,17 +210,13 @@ const Reviews = () => {
                 >
                   Your Review
                 </Typography>
-                <TextareaAutosize
+                <TextField
                   aria-label="minimum height"
-                  minRows={4}
+                  multiline={true}
+                  rows={4}
                   placeholder="Write your review here..."
                   style={{
                     width: "100%",
-                    borderRadius: 4,
-                    padding: 8,
-                    border: "1px solid #ccc",
-                    fontSize: "0.9rem",
-                    backgroundColor: "#f5f7fa",
                   }}
                 />
               </Box>

@@ -13,11 +13,11 @@ import {
   Tab,
 } from "@mui/material";
 import { Favorite, FavoriteBorder, Add, Remove } from "@mui/icons-material";
-import img from "@assets/feature_prod_01.jpg";
-import ImageSlider from "@components/main/products/ImageSlider";
-import Reviews from "@components/main/products/Reviews";
-import Sepecifications from "@components/main/products/Specifications";
-import Footer from "@components/main/Footer";
+import img from "@/assets/images/feature_prod_01.jpg";
+import ImageSlider from "@/components/main/products/ImageSlider";
+import Reviews from "@/components/main/products/Reviews";
+import Sepecifications from "@/components/main/products/Specifications";
+import Footer from "@/components/main/Footer";
 
 const ProductPage = () => {
   const [quantity, setQuantity] = useState(1);
